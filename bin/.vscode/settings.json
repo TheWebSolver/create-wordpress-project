@@ -9,7 +9,7 @@
   // <--- phpcs optional setting --->
   // PHPCS Codesniffer's either global or local path.
   "phpcs.executablePath": "path\\to\\Composer\\vendor\\bin\\phpcs",
-  // PHPCS Standard rules file iside project directory.
+  // PHPCS Standard rules file inside project directory.
   "phpcs.standard": "path\\to\\wp-content\\plugins_or_themes\\create-wordpress-project\\phpcs.xml.dist",
   // Fira Code font containing a set of ligatures for common programming multi-character combinations.
   "editor.fontFamily": "'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace",
