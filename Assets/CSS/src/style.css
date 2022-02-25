@@ -1,0 +1,236 @@
+/**
+ * Global stylesheet.
+ *
+ * This stylsheet file will be enabled globally by default.
+ *
+ * -----------------------------------
+ * DEVELOPED-MAINTAINED-SUPPPORTED BY
+ * -----------------------------------
+ * ███║     ███╗   ████████████████
+ * ███║     ███║   ═════════██████╗
+ * ███║     ███║        ╔══█████═╝
+ *  ████████████║      ╚═█████
+ * ███║═════███║      █████╗
+ * ███║     ███║    █████═╝
+ * ███║     ███║   ████████████████╗
+ * ╚═╝      ╚═╝    ═══════════════╝
+ */
+
+/*======================================
+ * IMPORT CUSTOM VARS AND MEDIA QUERIES
+======================================*/
+@import "_custom-properties.css";
+@import "_custom-media.css";
+
+/* General styling */
+.tws-whitelabel {
+	position: relative;
+	margin-bottom: 2em;
+}
+
+.tws-whitelabel h1,
+.tws-whitelabel h2,
+.tws-whitelabel h3,
+.tws-whitelabel h4 {
+	color: var(--tws-whitelabel-white);
+	margin: 0;
+}
+
+.tws-whitelabel ol,
+.tws-whitelabel ul {
+	list-style: none;
+	padding-inline-start: 0;
+	padding-left: 0;
+}
+
+.tws-whitelabel * {
+	line-height: 1.6;
+	margin-bottom: 0.5em;
+	margin-top: 0;
+}
+
+.tws-whitelabel a {
+	color: var(--tws-whitelabel-dark-alt);
+	text-decoration: none;
+}
+
+.tws-whitelabel .details {
+	margin-bottom: 1.8rem;
+}
+
+.tws-whitelabel input[type="text"],
+.tws-whitelabel textarea {
+	background: var(--tws-whitelabel-white);
+	border: 2px solid var(--tws-whitelabel-gray);
+	border-radius: 5px;
+	color: var(--tws-whitelabel-night-blue);
+	font-size: 1em;
+	min-height: 50px;
+	padding: 15px;
+	transition: border 0.2s ease-in-out;
+	width: 100%;
+}
+
+.tws-whitelabel textarea {
+	resize: vertical;
+}
+
+/* focus styling */
+.tws-whitelabel input[type="checkbox"]:focus,
+.tws-whitelabel input[type="color"]:focus,
+.tws-whitelabel input[type="date"]:focus,
+.tws-whitelabel input[type="datetime-local"]:focus,
+.tws-whitelabel input[type="datetime"]:focus,
+.tws-whitelabel input[type="email"]:focus,
+.tws-whitelabel input[type="month"]:focus,
+.tws-whitelabel input[type="number"]:focus,
+.tws-whitelabel input[type="password"]:focus,
+.tws-whitelabel input[type="radio"]:focus,
+.tws-whitelabel input[type="search"]:focus,
+.tws-whitelabel input[type="tel"]:focus,
+.tws-whitelabel input[type="text"]:focus,
+.tws-whitelabel input[type="time"]:focus,
+.tws-whitelabel input[type="url"]:focus,
+.tws-whitelabel input[type="week"]:focus,
+.tws-whitelabel select:focus,
+.tws-whitelabel textarea:focus,
+.tws-whitelabel input[type="checkbox"]:focus-visible,
+.tws-whitelabel input[type="color"]:focus-visible,
+.tws-whitelabel input[type="date"]:focus-visible,
+.tws-whitelabel input[type="datetime-local"]:focus-visible,
+.tws-whitelabel input[type="datetime"]:focus-visible,
+.tws-whitelabel input[type="email"]:focus-visible,
+.tws-whitelabel input[type="month"]:focus-visible,
+.tws-whitelabel input[type="number"]:focus-visible,
+.tws-whitelabel input[type="password"]:focus-visible,
+.tws-whitelabel input[type="radio"]:focus-visible,
+.tws-whitelabel input[type="search"]:focus-visible,
+.tws-whitelabel input[type="tel"]:focus-visible,
+.tws-whitelabel input[type="text"]:focus-visible,
+.tws-whitelabel input[type="time"]:focus-visible,
+.tws-whitelabel input[type="url"]:focus-visible,
+.tws-whitelabel input[type="week"]:focus-visible,
+.tws-whitelabel select:focus-visible,
+.tws-whitelabel textarea:focus-visible {
+	box-shadow: none;
+	outline: 2px solid var(--tws-whitelabel-green);
+}
+
+.tws-whitelabel input[type="file"]:focus-visible,
+.tws-whitelabel input[type="image"]:focus-visible {
+	outline: none;
+}
+
+/* Valid styling */
+.tws-whitelabel input[type="checkbox"].is-valid,
+.tws-whitelabel input[type="color"].is-valid,
+.tws-whitelabel input[type="date"].is-valid,
+.tws-whitelabel input[type="datetime-local"].is-valid,
+.tws-whitelabel input[type="datetime"].is-valid,
+.tws-whitelabel input[type="email"].is-valid,
+.tws-whitelabel input[type="month"].is-valid,
+.tws-whitelabel input[type="number"].is-valid,
+.tws-whitelabel input[type="password"].is-valid,
+.tws-whitelabel input[type="radio"].is-valid,
+.tws-whitelabel input[type="search"].is-valid,
+.tws-whitelabel input[type="tel"].is-valid,
+.tws-whitelabel input[type="text"].is-valid,
+.tws-whitelabel input[type="time"].is-valid,
+.tws-whitelabel input[type="url"].is-valid,
+.tws-whitelabel input[type="week"].is-valid,
+.tws-whitelabel select.is-valid,
+.tws-whitelabel textarea.is-valid {
+	border-color: var(--tws-whitelabel-success);
+}
+
+/* Errors styling */
+.tws-whitelabel span.has-error {
+	bottom: -0.9rem;
+	color: var(--tws-whitelabel-error);
+	display: block;
+	font-size: 0.9em;
+	left: 0;
+	margin: 0;
+	position: absolute;
+}
+
+.tws-whitelabel input[type="checkbox"].has-error,
+.tws-whitelabel input[type="color"].has-error,
+.tws-whitelabel input[type="date"].has-error,
+.tws-whitelabel input[type="datetime-local"].has-error,
+.tws-whitelabel input[type="datetime"].has-error,
+.tws-whitelabel input[type="email"].has-error,
+.tws-whitelabel input[type="month"].has-error,
+.tws-whitelabel input[type="number"].has-error,
+.tws-whitelabel input[type="password"].has-error,
+.tws-whitelabel input[type="radio"].has-error,
+.tws-whitelabel input[type="search"].has-error,
+.tws-whitelabel input[type="tel"].has-error,
+.tws-whitelabel input[type="text"].has-error,
+.tws-whitelabel input[type="time"].has-error,
+.tws-whitelabel input[type="url"].has-error,
+.tws-whitelabel input[type="week"].has-error,
+.tws-whitelabel select.has-error,
+.tws-whitelabel textarea.has-error {
+	border-color: var(--tws-whitelabel-error-alt);
+}
+
+.tws-whitelabel input[type="checkbox"].has-error:focus,
+.tws-whitelabel input[type="color"].has-error:focus,
+.tws-whitelabel input[type="date"].has-error:focus,
+.tws-whitelabel input[type="datetime-local"].has-error:focus,
+.tws-whitelabel input[type="datetime"].has-error:focus,
+.tws-whitelabel input[type="email"].has-error:focus,
+.tws-whitelabel input[type="month"].has-error:focus,
+.tws-whitelabel input[type="number"].has-error:focus,
+.tws-whitelabel input[type="password"].has-error:focus,
+.tws-whitelabel input[type="radio"].has-error:focus,
+.tws-whitelabel input[type="search"].has-error:focus,
+.tws-whitelabel input[type="tel"].has-error:focus,
+.tws-whitelabel input[type="text"].has-error:focus,
+.tws-whitelabel input[type="time"].has-error:focus,
+.tws-whitelabel input[type="url"].has-error:focus,
+.tws-whitelabel input[type="week"].has-error:focus,
+.tws-whitelabel select.has-error:focus,
+.tws-whitelabel textarea.has-error:focus,
+.tws-whitelabel input[type="checkbox"].has-error:focus-visible,
+.tws-whitelabel input[type="color"].has-error:focus-visible,
+.tws-whitelabel input[type="date"].has-error:focus-visible,
+.tws-whitelabel input[type="datetime-local"].has-error:focus-visible,
+.tws-whitelabel input[type="datetime"].has-error:focus-visible,
+.tws-whitelabel input[type="email"].has-error:focus-visible,
+.tws-whitelabel input[type="month"].has-error:focus-visible,
+.tws-whitelabel input[type="number"].has-error:focus-visible,
+.tws-whitelabel input[type="password"].has-error:focus-visible,
+.tws-whitelabel input[type="radio"].has-error:focus-visible,
+.tws-whitelabel input[type="search"].has-error:focus-visible,
+.tws-whitelabel input[type="tel"].has-error:focus-visible,
+.tws-whitelabel input[type="text"].has-error:focus-visible,
+.tws-whitelabel input[type="time"].has-error:focus-visible,
+.tws-whitelabel input[type="url"].has-error:focus-visible,
+.tws-whitelabel input[type="week"].has-error:focus-visible,
+.tws-whitelabel select.has-error:focus-visible,
+.tws-whitelabel textarea.has-error:focus-visible {
+	outline-color: var(--tws-whitelabel-error);
+}
+
+.tws-whitelabel fieldset {
+	border: none;
+	margin-bottom: 30px;
+	margin-inline: 0;
+	margin-left: 0;
+	margin-right: 0;
+	padding: 0;
+	padding-block: 0;
+	padding-inline: 0;
+}
+
+/* checkbox styling */
+.tws-checkbox-field .details {
+	display: flex;
+}
+
+.tws-checkbox-field .is-input {
+	margin-left: auto;
+	padding-left: 1rem;
+}

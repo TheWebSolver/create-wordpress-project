@@ -1,0 +1,8 @@
+{
+  "core": {
+    "slug": "test-tws-codegarage",
+    "name": "Test TheWebSolver Codegarage",
+    "author": "Shesh Ghimire",
+    "PHPNamespace": "Test\\TheWebSolver"
+  }
+}

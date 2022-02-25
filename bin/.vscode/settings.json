@@ -1,0 +1,96 @@
+{
+  // Prettier integration with Styleint and ESLlint.
+  "prettier.stylintIntegration": true,
+  "prettier.eslintIntegration": true,
+  // Enable stylesheet and script code formatting on save.
+  "editor.formatOnSave": true,
+  // Visualize whitespace on a file.
+  "editor.renderWhitespace": "all",
+  // <--- phpcs optional setting --->
+  // PHPCS Codesniffer's either global or local path.
+  "phpcs.executablePath": "path\\to\\Composer\\vendor\\bin\\phpcs",
+  // PHPCS Standard rules file iside project directory.
+  "phpcs.standard": "path\\to\\wp-content\\plugins_or_themes\\create-wordpress-project\\phpcs.xml.dist",
+  // Fira Code font containing a set of ligatures for common programming multi-character combinations.
+  "editor.fontFamily": "'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace",
+  // Comment anchor (some new) tag list with tagname and color options.
+  "commentAnchors.tags.list": [
+    {
+      "tag": "ANCHOR",
+      "iconColor": "default",
+      "highlightColor": "#A8C023",
+      "scope": "workspace"
+    },
+    {
+      "tag": "TODO",
+      "iconColor": "#ff0303",
+      "highlightColor": "#ff0303",
+      "backgroundColor": "rgba(255, 3, 3, 0.1)",
+      "styleComment": true,
+      "scope": "workspace"
+    },
+    {
+      "tag": "FIXME",
+      "iconColor": "#952694",
+      "highlightColor": "#952694",
+      "backgroundColor": "rgba(149, 38, 148,0.15)",
+      "borderStyle": "1px solid #952694",
+      "borderRadius": 3,
+      "styleComment": true,
+      "scope": "workspace"
+    },
+    {
+      "tag": "STUB",
+      "iconColor": "purple",
+      "highlightColor": "#BA68C8",
+      "scope": "file"
+    },
+    {
+      "tag": "NOTE",
+      "iconColor": "#FFB300",
+      "highlightColor": "#FFB300",
+      "backgroundColor": "RGBA(255, 179, 0, 0.3)",
+      "styleComment": true,
+      "scope": "workspace"
+    },
+    {
+      "tag": "DEBUG",
+      "iconColor": "#FFB300",
+      "highlightColor": "#FFB300",
+      "scope": "workspace"
+    },
+    {
+      "tag": "REVIEW",
+      "iconColor": "#237625",
+      "highlightColor": "#237625",
+      "backgroundColor": "rgba(49,184,79,0.1)",
+      "borderStyle": "1px solid #237625",
+      "borderRadius": 3,
+      "styleComment": true,
+      "scope": "workspace"
+    },
+    {
+      "tag": "SECTION",
+      "iconColor": "blurple",
+      "highlightColor": "#896afc",
+      "scope": "workspace",
+      "isRegion": true
+    },
+    {
+      "tag": "TEMPLATE",
+      "iconColor": "#01579b",
+      "highlightColor": "#01579b",
+      "scope": "workspace",
+    },
+    {
+      "tag": "WPHOOK",
+      "iconColor": "#14dcc9",
+      "highlightColor": "#14dcc9",
+      "backgroundColor": "rgba(49,184,79,0.1)",
+      "borderStyle": "1px solid #14dcc9",
+      "borderRadius": 3,
+      "styleComment": true,
+      "scope": "workspace",
+    }
+  ]
+}

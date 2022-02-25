@@ -1,0 +1,50 @@
+{
+  "core": {
+    "name": "TheWebSolver Codegarage",
+    "slug": "tws-codegarage",
+    "author": "Shesh Ghimire",
+    "PHPNamespace": "TheWebSolver\\Codegarage",
+    "underscoreCase": "tws_codegarage",
+    "camelCase": "twsCodeGarage",
+    "constant": "TWS_CODEGARAGE",
+    "whiteLabel": "tws-whitelabel"
+  },
+  "dev": {
+    "browserSync": {
+      "live": true,
+      "proxyURL": "test.tws:8888",
+      "bypassPort": "8181",
+      "https": false
+    },
+    "styles": {
+      "stage": 3,
+      "autoprefixer": {
+        "grid": false
+      },
+      "importFrom": [
+        "_custom-media.css"
+      ],
+      "features": {
+        "custom-media-queries": true,
+        "custom-properties": true,
+        "nesting-rules": true
+      }
+    },
+    "debug": {
+      "styles": false,
+      "scripts": false,
+      "phpcs": true
+    },
+    "phpcsPath": "C:\\Users\\Admin\\AppData\\Roaming\\Composer\\vendor\\bin\\phpcs"
+  },
+  "export": {
+    "compress": true,
+    "generatePotFile": true,
+    "isTheme": false,
+    "log": true,
+    "filesToCopy": [
+      "LICENSE",
+      "readme.txt"
+    ]
+  }
+}

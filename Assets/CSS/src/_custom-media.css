@@ -1,0 +1,12 @@
+/**
+ * Custom Media Queries
+ * Works like Custom Properties, except for media queries.
+ *
+ * @link: https://drafts.csswg.org/mediaqueries-5/#custom-mq
+ **/
+
+@custom-media --narrow-menu-query screen and (max-width: 37.5em); /* ~600px */
+@custom-media --wide-menu-query screen and (min-width: 40em); /* ~640px */
+@custom-media --content-query screen and (min-width: 48em); /* ~768px */
+@custom-media --tablet-query screen and (min-width: 53.5em); /* ~855px */
+@custom-media --sidebar-query screen and (min-width: 60em);

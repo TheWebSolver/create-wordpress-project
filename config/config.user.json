@@ -1,0 +1,30 @@
+{
+  "core": {
+    "name": "Awesome WorPress Plugin",
+    "slug": "awesome-plugin",
+    "author": "Awesome Person",
+    "PHPNamespace": "Awesome\\Plugin",
+    "underscoreCase": "awesome_plugin",
+    "camelCase": "awesomePlugin",
+    "constant": "AWE_PLUG",
+    "whiteLabel": "custom-prefix"
+  },
+  "dev": {
+    "browserSync": {
+      "live": true,
+      "proxyURL": "http://test.tws/",
+      "bypassPort": "8181",
+      "https": false
+    },
+    "debug": {
+      "styles": false,
+      "scripts": false,
+      "phpcs": true
+    },
+    "phpcsPath": "Awesome\\Plugin\\Path\\To\\Composer\\vendor\\bin\\phpcs"
+  },
+  "export": {
+    "isTheme": false,
+    "log": true
+  }
+}

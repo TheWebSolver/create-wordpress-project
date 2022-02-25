@@ -1,0 +1,33 @@
+/**
+ * Custom Properties
+ * aka CSS variables.
+ *
+ * @link: https://developer.mozilla.org/en-US/docs/Web/CSS/--*
+ **/
+
+:root {
+	--global-main-bg-color: #f3fbfd;
+	--global-gutter: 1.5em;
+	--tws-whitelabel-dark: #0f3143;
+	--tws-whitelabel-dark-alt: #10394d;
+	--tws-whitelabel-night-blue: #263238;
+	--tws-whitelabel-white: #fff;
+	--tws-whitelabel-success: #7bbc9b;
+	--tws-whitelabel-warn: #f5cdcd;
+	--tws-whitelabel-error: #ac2222;
+	--tws-whitelabel-error-alt: #c02626;
+	--tws-whitelabel-error-disabled: #7b3939;
+	--tws-whitelabel-error-bg: #631b23;
+	--tws-whitelabel-gray: #eee;
+	--tws-whitelabel-gray-mid: #ccc;
+	--tws-whitelabel-gray-hard: #808080;
+	--tws-whitelabel-bluish: #0d92a0;
+	--tws-whitelabel-green: #009688;
+	--tws-whitelabel-orange-dark: #d84315;
+	--tws-whitelabel-shadow: #0c2a3a;
+	--tws-whitelabel-green-defocus: #e0f2f1;
+	--tws-whitelabel-steps-offset: 240px;
+	--tws-whitelabel-steps-offset-mobile: 100px;
+	--tws-whitelabel-top-offset: 100px;
+	--tws-whitelabel-border-radius: 5px;
+}

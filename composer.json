@@ -1,0 +1,34 @@
+{
+	"name": "awesome/plugin",
+	"description": "An awesome plugin bootstrapped from create-wordpress-project.",
+	"license": "GPL-3.0-or-later",
+	"version": "1.0",
+	"authors": [
+		{
+			"name": "Awesome Person",
+			"email": "awesome@person.io"
+		}
+	],
+	"keywords": [
+		"WordPress",
+		"Plugin",
+		"framework"
+	],
+	"autoload": {
+		"psr-4": { "Awesome\\Plugin\\": [ "Assets/", "Includes" ] }
+	},
+	"require-dev": {
+    "php": ">=7.0",
+    "wp-coding-standards/wpcs": "^2",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+    "phpunit/phpunit": "^6",
+    "brain/monkey": "^2",
+    "phpcompatibility/php-compatibility": "^9",
+    "mnsami/composer-custom-directory-installer": "2.0"
+  },
+  "config": {
+    "platform": {
+      "php": "7.0"
+    }
+  }
+}

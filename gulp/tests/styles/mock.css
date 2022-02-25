@@ -1,0 +1,19 @@
+@import "_custom-properties.css";
+
+.main {
+	background-color: var(--global-main-bg-color);
+	display: grid;
+	font-weight: 400;
+}
+
+/* Add margin bottom when content is around 768px */
+@media (--content-query) {
+
+	.main {
+		margin-bottom: var(--global-gutter);
+
+		& .inner {
+			padding: 1rem;
+		}
+	}
+}
