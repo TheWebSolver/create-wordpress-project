@@ -26,6 +26,7 @@
 
 # Project bootstrap files.
 !/bin
+!/Includes
 
 !.babelrc
 !composer.json
