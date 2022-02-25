@@ -152,7 +152,6 @@ class Asset {
 		if ( file_exists( Bootstrap::load()->path( 'CSS/editor/editor-styles.min.css' ) ) ) {
 			$css .= ',' . Bootstrap::load()->url( 'CSS/editor/editor-styles.min.css' );
 		}
-		echo '<pre>'; print_r( $css ); echo '</pre>'; //phpcs:ignore
 
 		return $css;
 	}
