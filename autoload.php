@@ -1,4 +1,4 @@
-<?php // phpcs:ignore WordPress.NamingConventions
+<?php
 /**
  * The autoloader API.
  *
@@ -40,7 +40,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 	 * - `root/Includes/API/General_API.php`
 	 *
 	 * ```
-	 * // From plugin root, init autoloader.
+	 * // From project root, init autoloader.
 	 * use TheWebSolver\Autoloader;
 	 *
 	 * $loader = new Autoloader();
@@ -77,13 +77,13 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 	 *  'TheWebSolver\\Feature\\' => 'Source',
 	 * );
 	 *
-	 * // From plugin root, init autoloader.
+	 * // From project root, init autoloader.
 	 * $loader->root(__DIR__)->path($map)->register();
 	 * ```
 	 */
 	class Autoloader {
 		/**
-		 * The plugin root.
+		 * The project root.
 		 *
 		 * @var string
 		 * @since 1.0
@@ -91,7 +91,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 		public $root;
 
 		/**
-		 * The current plugin directory name
+		 * The current project directory name.
 		 *
 		 * @var string
 		 * @since 1.0
@@ -107,7 +107,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 		public $paths;
 
 		/**
-		 * The classes set for inclusion.
+		 * Classes set for inclusion.
 		 *
 		 * @var string[]
 		 * @since 1.0
@@ -150,9 +150,9 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 		}
 
 		/**
-		 * Sets plugin root.
+		 * Sets project root.
 		 *
-		 * @param string $dir The plugin root directory path. Usually `__DIR__`.
+		 * @param string $dir The project root directory path. Usually `__DIR__`.
 		 * @return Autoloader
 		 * @since 1.0
 		 */
@@ -322,7 +322,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 		 * Includes file if mapping successful.
 		 *
 		 * @param string $class The full class to instantiate.
-		 * @return bool True if autoloaded, false otherwise. Catch error, if any.
+		 * @return bool True if autoloaded, false otherwise.
 		 * @since 1.0
 		 */
 		public function autoload( string $class ): bool {
@@ -333,14 +333,6 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 
 		/**
 		 * Registers classes for autoloading.
-		 *
-		 * Internally, composer autoload file is checked. If it exists:
-		 * * Composer autoload file will be included without custom registration.
-		 * * Composer autoload file must be on same root.
-		 * * This method will always return true.
-		 *
-		 * Param passed will only be used if composer autoload file does not exist.
-		 * {@see `spl_autoload_register()`}.
 		 *
 		 * @param bool $throw   Specifies whether spl_autoload_register() should throw
 		 *                      exceptions when the autoload_function cannot be
@@ -369,7 +361,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 		/**
 		 * Gets mapped paths.
 		 *
-		 * @return bool[]
+		 * @return bool[] Filepath as index, true as value.
 		 * @since 1.0
 		 */
 		public function get(): array {
@@ -381,7 +373,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 		 *
 		 * It includes those files that do not get mapped.
 		 *
-		 * @return bool[]
+		 * @return bool[] Filepath as index, autoloaded (true) or not (false) as value.
 		 * @since 1.0
 		 */
 		public function get_all(): array {
@@ -391,7 +383,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 		/**
 		 * Gets mapped classes.
 		 *
-		 * @return string[]
+		 * @return string[] Class as index, filepath as value.
 		 * @since 1.0
 		 */
 		public function classes(): array {
@@ -404,7 +396,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 		 * @return string
 		 * @since 1.0
 		 */
-		public function template(): string {
+		public function default_path(): string {
 			return apply_filters( 'tws_default_tempate_path_' . $this->dir, 'templates/thewebsolver/' );
 		}
 
@@ -425,7 +417,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 		public function locate( $template_name, $template_path = '', $default_path = '' ) {
 			// Set the template path.
 			if ( ! $template_path ) {
-				$template_path = $this->template();
+				$template_path = $this->default_path();
 			}
 
 			if ( ! $default_path ) {
@@ -456,7 +448,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 		 * @param array  $args The args passed to the template file.
 		 * @since 1.0
 		 */
-		public function get_template_part( string $slug, string $name = '', array $args = array() ) {
+		public function template_part( string $slug, string $name = '', array $args = array() ) {
 			if ( ! empty( $args ) ) {
 				extract( $args ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 			}
@@ -470,8 +462,8 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 			 */
 			$template = locate_template(
 				array(
-					$this->template() . "{$slug}-{$name}.php",
-					$this->template() . "{$slug}.php",
+					$this->default_path() . "{$slug}-{$name}.php",
+					$this->default_path() . "{$slug}.php",
 				)
 			);
 
@@ -481,7 +473,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 			 * @var string
 			 * @since 1.0
 			 */
-			$template_path = apply_filters( 'tws_locate_template_path_' . $this->dir, $this->root . '/templates/input', $template, $args );
+			$template_path = apply_filters( 'tws_locate_template_path_' . $this->dir, $this->root . '/template-parts', $template, $args );
 
 			// Get default slug-name.php.
 			if ( ! $template && $name && file_exists( $template_path . "/{$slug}-{$name}.php" ) ) {
@@ -515,7 +507,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 		 * @return void
 		 * @since 1.0
 		 */
-		public function display( string $template_name, array $args = array(), string $template_path = '', string $default_path = '' ) {
+		public function template( string $template_name, array $args = array(), string $template_path = '', string $default_path = '' ) {
 			if ( ! empty( $args ) ) {
 				extract( $args ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 			}
