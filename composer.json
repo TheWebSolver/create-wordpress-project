@@ -1,28 +1,27 @@
 {
-	"name": "awesome/plugin",
-	"description": "An awesome plugin bootstrapped from create-wordpress-project.",
+	"name": "create-wordpress-project",
+	"description": "A developer toolkit for build process to lint, code-sniff, translate, bundle, etc.",
 	"license": "GPL-3.0-or-later",
 	"version": "1.0",
 	"authors": [
 		{
-			"name": "Awesome Person",
-			"email": "awesome@person.io"
+			"name": "Shesh Ghimire",
+			"email": "shesh@thewebsolver.com"
 		}
 	],
 	"keywords": [
 		"WordPress",
 		"Plugin",
-		"framework"
+		"framework",
+    "toolkit"
 	],
 	"autoload": {
-		"psr-4": { "Awesome\\Plugin\\": [ "Assets/", "Includes" ] }
+		"psr-4": { "TheWebSolver\\Codegarage\\": [ "Assets/", "Includes/" ] }
 	},
 	"require-dev": {
     "php": ">=7.0",
     "wp-coding-standards/wpcs": "^2",
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
-    "phpunit/phpunit": "^6",
-    "brain/monkey": "^2",
     "phpcompatibility/php-compatibility": "^9",
     "mnsami/composer-custom-directory-installer": "2.0"
   },

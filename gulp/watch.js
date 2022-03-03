@@ -30,6 +30,7 @@ import images from './images';
 import scripts from './scripts';
 import styles from './styles';
 import editorStyles from './editorStyles';
+import { bundleScripts } from './webpack/webpack';
 
 /**
  * Watch everything.
@@ -61,6 +62,8 @@ const watch = () => {
 	gulpWatch( backslashToForwardSlash( paths.styles.src[ 0 ] ), series( styles, editorStyles ) );
 
 	gulpWatch( backslashToForwardSlash( paths.scripts.src[ 0 ] ), series( scripts, reload ) );
+
+	gulpWatch( backslashToForwardSlash( paths.scripts.bundlerSrc ), series( bundleScripts, reload ) );
 
 	gulpWatch( backslashToForwardSlash( paths.images.src ), series( images, reload ) );
 };

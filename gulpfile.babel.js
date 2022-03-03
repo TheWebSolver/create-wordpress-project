@@ -16,7 +16,6 @@ import {
 	cleanJS,
 } from './gulp/clean';
 
-
 import { copyPluginMainFile } from './gulp/bootstrap/plugin';
 import { copyThemeMainFiles } from './gulp/bootstrap/theme';
 import generateCert from './gulp/generateCert';
@@ -33,14 +32,15 @@ import stringReplace from './gulp/export/stringReplace';
 import compress from './gulp/export/compress';
 import { verifyMainFile } from './gulp/helper/promise';
 import copyProjectFiles, { updateProjectMainFiles } from './gulp/export/project';
+import { bundleScripts } from './gulp/webpack/webpack';
 
 /**
  * Export for bootstrapping project by its type before developing project.
  */
- export const bootstrapProject = copyProjectFiles;
+export const bootstrapProject = copyProjectFiles;
 
 /**
- * Map out the sequence of events on first load and make it the default task
+ * Map out the sequence of events on first load and make it the default task.
  */
 export const developProject = series(
 	cleanCSS,
@@ -52,7 +52,8 @@ export const developProject = series(
 			styles,
 			editorStyles
 		),
-		scripts
+		scripts,
+		bundleScripts,
 	),
 	serve,
 	watch
@@ -82,6 +83,7 @@ export const exportProject = series(
 	parallel(
 		php,
 		scripts,
+		bundleScripts,
 		series(
 			styles,
 			editorStyles
@@ -113,6 +115,7 @@ export {
 	images,
 	php,
 	scripts,
+	bundleScripts,
 	styles,
 	editorStyles,
 	translate,

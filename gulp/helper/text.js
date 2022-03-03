@@ -57,6 +57,6 @@ export const bold = ( text ) => chalk.bold( text );
  * Makes given text a yellow color.
  *
  * @param {string} text The text to be converted.
- * @return {string} The bold text.
+ * @return {string} The colored text.
  */
 export const notice = ( text ) => chalk.yellow( text );

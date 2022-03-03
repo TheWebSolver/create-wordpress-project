@@ -1,28 +1,37 @@
 {
-  "name": "awesome-plugin",
+  "name": "create-wordpress-project",
   "version": "1.0.0",
-  "description": "An awesome plugin bootstrapped from create-wordpress-project.",
-  "author": "Awesome Person",
+  "description": "A developer toolkit for build process to lint, code-sniff, translate, bundle, etc.",
+  "author": "Shesh Ghimire",
   "license": "GPL-3.0-or-later",
-  "main": "awesome-plugin.php",
-  "homepage": "https://awesome.io",
+  "main": "autoload.php",
+  "homepage": "https://github.com/thewebsolver/create-wordpress-project",
   "repository": {
     "type": "git",
-    "url": "git+https://awesome.io"
+    "url": "git+https://github.com/thewebsolver/create-wordpress-project.git"
   },
   "bugs": {
-    "url": "https://awesome.io"
+    "url": "https://github.com/thewebsolver/create-wordpress-project/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.16.7",
     "@babel/register": "^7.11.5",
+    "@wordpress/block-editor": "^8.2.0",
+    "@wordpress/blocks": "^11.2.2",
+    "@wordpress/components": "^19.5.0",
+    "@wordpress/compose": "^5.1.2",
+    "@wordpress/element": "^4.1.1",
     "@wordpress/eslint-plugin": "^2.4.0",
+    "@wordpress/hooks": "^3.3.1",
+    "@wordpress/i18n": "^4.3.1",
     "@wordpress/stylelint-config": "^20.0.1",
     "ajv": "^6.12.4",
     "ansi-colors": "^4.1.1",
     "autoprefixer": "^10.4.2",
     "babel-jest": "^24.9.0",
+    "babel-loader": "^8.2.3",
     "browser-sync": "^2.26.12",
     "create-cert": "^1.0.6",
     "cross-env": "^5.2.1",
@@ -67,6 +76,7 @@
     "import-fresh": "^3.2.1",
     "jest": "^24.9.0",
     "jest-expect-message": "^1.0.2",
+    "lodash": "^4.17.21",
     "map-stream": "0.0.7",
     "merge-stream": "^2.0.0",
     "mississippi": "^4.0.0",
@@ -79,10 +89,18 @@
     "postcss-preset-env": "^7.4.1",
     "postcss-reporter": "^7.0.5",
     "pump": "^3.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "rimraf": "^2.7.1",
     "stylelint": "^14.5.1",
     "stylelint-config-standard": "^25.0.0",
-    "vinyl": "^2.2.0"
+    "terser-webpack-plugin": "^5.3.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "vinyl": "^2.2.0",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0",
+    "webpack": "^5.69.1",
+    "webpack-stream": "^7.0.0"
   },
   "babel": {
     "presets": [
@@ -90,7 +108,10 @@
     ]
   },
   "eslintConfig": {
-    "extends": "plugin:@wordpress/eslint-plugin/recommended",
+    "extends": [
+      "plugin:@wordpress/eslint-plugin/recommended",
+      "plugin:react/recommended"
+    ],
     "root": true,
     "env": {
       "browser": true,
@@ -105,6 +126,11 @@
     "rules": {
       "no-unused-vars": "off",
       "no-console": "off"
+    },
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      }
     }
   },
   "jest": {
@@ -121,8 +147,9 @@
     "create-wp-plugin": "gulp bootstrapPluginProject",
     "build": "gulp buildDev",
     "bundle": "cross-env NODE_ENV=production gulp exportProject",
-    "dev": "gulp developProject",
+    "dev": "cross-env NODE_ENV=development gulp developProject",
     "gulp": "gulp",
+    "webpack": "gulp bundleScripts",
     "generateCert": "gulp generateCert",
     "rig-init": "npm install && composer install",
     "translate": "gulp translate",
@@ -135,6 +162,7 @@
     "lint": "eslint assets/js/src/",
     "lint:gulp": "eslint gulp/",
     "lint:gulp:fix": "eslint --fix gulp/",
-    "lint:gulpfile": "eslint gulpfile.babel.js"
+    "lint:configfile": "eslint gulpfile.babel.js webpack.config.js",
+    "lint:configfile:fix": "eslint --fix gulpfile.babel.js webpack.config.js"
   }
 }

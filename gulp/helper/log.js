@@ -324,3 +324,16 @@ export const afterCompress = ( doLog, done ) => {
 
 	return sendMsg( msg, doLog, done );
 };
+
+/**
+ * Shows log message when entry was not provided for webpack.
+ *
+ * @param {boolean}  doLog Whether to log the message or not.
+ * @param {function} done  Function to call when async processes finish.
+ * @return {string} The message.
+ */
+export const bundlerNotActive = ( doLog = true, done ) => {
+	const msg = notice( 'Entry files not found for initializing bundler. Skipping...' );
+
+	return sendMsg( msg, doLog, done );
+};

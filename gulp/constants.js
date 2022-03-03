@@ -73,6 +73,12 @@ export const assetsDir = `${ rootPath }/assets`;
  */
 export const prodAssetsDir = `${ prodMainPath }/assets`;
 
+/** Directory for pre-bundled scripts. */
+export const bundlerSrc = `${ assetsDir }/js/src/bundler`;
+
+/** Directory for post-bundled scripts. */
+export const bundlerDest = `${ assetsDir }/js/dist`;
+
 /**
  * Directory for phpcs form composer installed globally.
  */
@@ -220,11 +226,18 @@ const paths = {
 	scripts: {
 		src: [
 			`${ assetsDir }/js/src/**/*.js`,
+
 			// Ignore partial files.
 			`!${ assetsDir }/js/src/**/_*.js`,
+
+			// Ignore bundled files.
+			`!${ bundlerSrc }/**/*.js`,
 		],
 		srcDir: `${ assetsDir }/js/src`,
 		dest: `${ assetsDir }/js`,
+
+		bundlerSrc: `${ bundlerSrc }/**/*.js`,
+		bundlerDest,
 	},
 	images: {
 		src: `${ assetsDir }/images/src/**/*.{jpg,JPG,png,svg,gif,GIF}`,
@@ -280,6 +293,8 @@ if ( isProd ) {
 		src: `${ prodMainPath }/**/*.php`,
 		dest: `${ prodMainPath }/languages/${ config.core.slug }.pot`,
 	};
+
+	paths.scripts.bundlerDest = `${ prodAssetsDir }/js/dist`;
 }
 
 export { paths };
