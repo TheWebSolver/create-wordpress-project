@@ -284,7 +284,7 @@ class Asset {
 	/**
 	 * Preloads in-body stylesheets depending on what templates are being used.
 	 *
-	 * Only stylesheets that have a 'preload_callback' provided will be considered.
+	 * Only stylesheets that have a 'preload' provided will be considered.
 	 * If that callback evaluates to true for the current request,
 	 * the stylesheet will be preloaded.
 	 *
@@ -324,7 +324,7 @@ class Asset {
 	}
 
 	/**
-	 * Enqueues WordPress theme styles for the block editor.
+	 * Enqueues WordPress theme styles for the editor.
 	 */
 	public function add_editor_styles() {
 		$url = $this->google_fonts();
@@ -334,7 +334,7 @@ class Asset {
 			add_editor_style( $url );
 		}
 
-		// Enqueue block editor stylesheet.
+		// Enqueue editor stylesheet.
 		if ( file_exists( Bootstrap::load()->path( 'Assets/CSS/editor/editor-styles.min.css' ) ) ) {
 			add_editor_style( 'Assets/CSS/editor/editor-styles.min.css' );
 		}
