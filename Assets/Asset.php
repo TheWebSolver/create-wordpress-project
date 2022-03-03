@@ -133,19 +133,18 @@ class Asset {
 	 * @since 1.0
 	 */
 	public function filter_editor_styles( string $css ): string {
-		// Append comma to already added editor styles.
-		if ( ! empty( $css ) ) {
-			$css .= ',';
-		}
-
-		if ( $url = $this->google_fonts() ) {
+		if ( $_url = $this->google_fonts() ) {
 			/**
 			 * Encode only space and comma present in google fonts URL.
 			 *
+			 * - Space can't be used in a URL. Who am I kidding?
+			 * - Comma is for separating script URLs. So, it can't be used either.
+			 *
+			 * @var string The encoded URI.
 			 * @link https://www.w3schools.com/tags/ref_urlencode.asp
 			 */
-			$url  = str_replace( array( ' ', ',' ), array( '%20', '%2C' ), $url );
-			$css .= $url;
+			$url  = str_replace( array( ' ', ',' ), array( '%20', '%2C' ), $_url );
+			$css .= ',' . $url;
 		}
 
 		// Map URI to editor styles from the plugin's directory.
@@ -752,7 +751,7 @@ class Asset {
 	/**
 	 * Gets localized scripts.
 	 *
-	 * @param string $handle The registered script handle.
+	 * @param string $handle The localized script handle.
 	 * @return array         If handle is given, localized script for that handle.
 	 *                       Else all localized scripts.
 	 * @since 1.0
@@ -761,7 +760,7 @@ class Asset {
 		/**
 		 * WPHOOK: Filter -> Localized scripts.
 		 *
-		 * @param ((bool|callable)[]|string|bool|null)[] $scripts The registered scripts.
+		 * @param ((bool|callable)[]|string|bool|null)[] $scripts The localized scripts.
 		 * @var ((bool|callable)[]|string|bool|null)[]
 		 * @since 1.0
 		 */
