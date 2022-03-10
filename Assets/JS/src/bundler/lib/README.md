@@ -1,13 +1,14 @@
-## Gettting Started
+## Getting Started
 
-The Webpack entry files are handled from the `bundler` directory that must exist inside `Assets/JS/src` directory.
+The Webpack entry files are handled from the [***bundler***][b] directory that must exist inside [***src***][s] directory.
 
 ---
 
-The main file that is passed to [Webpack `entry`](https://webpack.js.org/concepts/entry-points/#root) property should exist inside `bundler` directory (the parent to this directory).
-> This approach supports [Webpack Context Module API](https://webpack.js.org/guides/dependency-management/#context-module-api) and is recommended to follow the same practice.
+The main file that is passed to [***Webpack*** *entry*][e] point should exist inside [***bundler***][b] directory (the parent to this directory).
 
-Each entry file components and it's related `.js` files must exist inside this `lib` (this) directory.
+> This approach supports [***Webpack*** *Context API*][api] and is recommended to follow the same practice.
+
+Each entry file components and it's related `.js` files must exist inside [*this*][lib] directory.
 
 ## Example:
 
@@ -55,7 +56,7 @@ Assets
 ```
 ### Webpack Entry
 
-Lets define the entry files from the file structure above inside [webpack.config.js]().
+Lets define the entry files from the file structure above inside [*webpack.config.js*][w].
 
 > The `entrypath` used below is a helper variable defined inside the Webpack config file itself to get entry files path.
 
@@ -86,7 +87,7 @@ const output = {
 
 ### Main Files
 
-Inside the main bundler files ***entryfile1.js*** and ***entryfile2.js*** located at `js/src/bundler` directory as [structured above](#file-structure), use the [Webpack Context API](https://webpack.js.org/guides/dependency-management/#context-module-api) to import their respective `index.js` file located at `js/src/bundler/lib` (this) directory.
+Inside the main bundler files ***entryfile1.js*** and ***entryfile2.js*** located inside [***bundler***][b] directory as [*structured above*](#file-structure), use the [***Webpack*** *Context API*][api] to import their respective `index.js` file located at [*this*][lib] directory.
 
 ```js
 // Related files.
@@ -106,4 +107,13 @@ const importAll = ( request ) => {
 // Get "index.js" file present inside "lib" sub-directories and import them.
 importAll( require.context( mainFileDir, ignoreSubDir, lookForIndex ) );
 ```
+
+<!-- MARKDOWN LINKS -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[e]: https://webpack.js.org/concepts/entry-points/#root 'Docs link to Webpack entry point'
+[b]: Assets/JS/src/bundler 'The Webpack entry files directory'
+[s]: Assets/JS/src 'The javascript files source directory'
+[api]: https://webpack.js.org/guides/dependency-management/#context-module-api 'Docs link to Webpack Context API'
+[lib]: Assets/JS/src/bundler/lib 'Where Webpack entry file\'s related files exist'
+[w]: webpack.config.js 'The Webpack configuration file'
 
