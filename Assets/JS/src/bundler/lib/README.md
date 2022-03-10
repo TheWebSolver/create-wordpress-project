@@ -111,9 +111,9 @@ importAll( require.context( mainFileDir, ignoreSubDir, lookForIndex ) );
 <!-- MARKDOWN LINKS -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [e]: https://webpack.js.org/concepts/entry-points/#root 'Docs link to Webpack entry point'
-[b]: Assets/JS/src/bundler 'The Webpack entry files directory'
-[s]: Assets/JS/src 'The javascript files source directory'
+[b]: /Assets/JS/src/bundler 'The Webpack entry files directory'
+[s]: /Assets/JS/src 'The javascript files source directory'
 [api]: https://webpack.js.org/guides/dependency-management/#context-module-api 'Docs link to Webpack Context API'
-[lib]: Assets/JS/src/bundler/lib 'Where Webpack entry file\'s related files exist'
+[lib]: /Assets/JS/src/bundler/lib 'Where Webpack entry file\'s related files exist'
 [w]: webpack.config.js 'The Webpack configuration file'
 
