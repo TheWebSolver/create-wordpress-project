@@ -115,5 +115,5 @@ importAll( require.context( mainFileDir, ignoreSubDir, lookForIndex ) );
 [s]: /Assets/JS/src 'The javascript files source directory'
 [api]: https://webpack.js.org/guides/dependency-management/#context-module-api 'Docs link to Webpack Context API'
 [lib]: /Assets/JS/src/bundler/lib 'Where Webpack entry file\'s related files exist'
-[w]: webpack.config.js 'The Webpack configuration file'
+[w]: /webpack.config.js 'The Webpack configuration file'
 
