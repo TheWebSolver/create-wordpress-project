@@ -3,10 +3,10 @@
  * The autoloader API.
  *
  * The autoloading class with namespace mapping.
- * An alternative to the composer autloader.
+ * An alternative to the composer autoloader.
  *
  * -----------------------------------
- * DEVELOPED-MAINTAINED-SUPPPORTED BY
+ * DEVELOPED-MAINTAINED-SUPPORTED BY
  * -----------------------------------
  * ███║     ███╗   ████████████████
  * ███║     ███║   ═════════██████╗
@@ -53,7 +53,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 	 * - `root/Includes/Template/General/Another_Class.php`
 	 * - `root/Source/API/General_API.php`
 	 *
-	 * Below is the structure how namesapce and classname should be for different directories.
+	 * Below is the structure how namespace and classname should be for different directories.
 	 * ```
 	 * // File: Helper_Class.php
 	 * namespace TheWebSolver\Core\Helper;
@@ -281,7 +281,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 			 * @var string $namespace
 			 */
 			foreach ( $this->paths as $namespace => $dir ) {
-				// Remove preceeding and succeeding slashes and add succeeding one.
+				// Remove preceding and succeeding slashes and add succeeding one.
 				$ns = trim( $namespace, '\\' ) . '\\';
 
 				// Ignore classes not in the given namespace.
@@ -291,7 +291,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 
 				$parts = $this->parts( $ns );
 
-				// Ignore non-classmapped.
+				// Ignore non-classmap.
 				if ( empty( $parts ) ) {
 					continue;
 				}
@@ -397,7 +397,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 		 * @since 1.0
 		 */
 		public function default_path(): string {
-			return apply_filters( 'tws_default_tempate_path_' . $this->dir, 'templates/thewebsolver/' );
+			return apply_filters( 'tws_default_template_path_' . $this->dir, 'templates/thewebsolver/' );
 		}
 
 		/**
@@ -501,7 +501,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 		 * Gets template file that can be overridden from themes.
 		 *
 		 * @param string $template_name The template file name.
-		 * @param array  $args          The agruments to be passed to template file.
+		 * @param array  $args          The arguments to be passed to template file.
 		 * @param string $template_path The template path.
 		 * @param string $default_path  The default path.
 		 * @return void

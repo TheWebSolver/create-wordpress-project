@@ -1,9 +1,8 @@
 /**
- * Custom Properties
- * aka CSS variables.
+ * Custom Properties aka CSS variables.
  *
  * @link: https://developer.mozilla.org/en-US/docs/Web/CSS/--*
- **/
+ */
 
 :root {
 	--global-main-bg-color: #f3fbfd;

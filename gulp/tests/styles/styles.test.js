@@ -144,7 +144,7 @@ test( 'Debug config disables minify.', ( done ) => {
 	function assert( files ) {
 		const file = files[ 0 ];
 		const fileContents = file.contents.toString( 'utf-8' );
-		// Unminified files will have newlines.
+		// Un-minified files will have newlines.
 		expect( fileContents ).toContain( '\n' );
 	}
 
@@ -176,7 +176,7 @@ test( 'IE grid prefix if configured.', ( done ) => {
 
 test( 'No IE grid prefix by default.', ( done ) => {
 	const config = getMainConfig();
-	// Set autoprefix to the default value.
+	// Set auto-prefix to the default value.
 	const defaultConfig = getDefaultConfig();
 	config.dev.styles.autoprefixer = defaultConfig.dev.styles.autoprefixer;
 

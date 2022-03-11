@@ -173,9 +173,9 @@ const paths = {
 	assetsDir,
 	browserSync: {
 		dir: `${ rootPath }/BrowserSync`,
-		cert: `${ rootPath }/BrowserSync/wp-rig-browser-sync-cert.crt`,
-		caCert: `${ rootPath }/BrowserSync/wp-rig-browser-sync-root-cert.crt`,
-		key: `${ rootPath }/BrowserSync/wp-rig-browser-sync-key.key`,
+		cert: `${ rootPath }/BrowserSync/tws-codegarage-browser-sync-cert.crt`,
+		caCert: `${ rootPath }/BrowserSync/tws-codegarage-browser-sync-root-cert.crt`,
+		key: `${ rootPath }/BrowserSync/tws-codegarage-browser-sync-key.key`,
 	},
 	config: {
 		mainConfig: `${ rootPath }/config/config.js`,

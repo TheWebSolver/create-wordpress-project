@@ -1,6 +1,6 @@
 ## Create WordPress Classic Theme
 
-> Classic themes must  include the required theme files. These files must follow template file standards set by the themes team. For Classic themes, additional standard template files are recommended to use. Learn more about the [Organizing Theme Files](https://developer.wordpress.org/themes/basics/organizing-theme-files/).
+> Classic themes must include the required theme files. These files must follow template file standards set by the themes team. For Classic themes, additional standard template files are recommended to use. Learn more about the [Organizing Theme Files](https://developer.wordpress.org/themes/basics/organizing-theme-files/).
 
 > Learn more about theme requirement using [Theme Handbook](https://developer.wordpress.org/themes/releasing-your-theme/required-theme-files/) from **WordPress Developer** docs.
 

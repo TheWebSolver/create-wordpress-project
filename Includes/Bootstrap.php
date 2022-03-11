@@ -3,7 +3,7 @@
  * Bootstrap class.
  *
  * -----------------------------------
- * DEVELOPED-MAINTAINED-SUPPPORTED BY
+ * DEVELOPED-MAINTAINED-SUPPORTED BY
  * -----------------------------------
  * ███║     ███╗   ████████████████
  * ███║     ███║   ═════════██████╗
@@ -307,7 +307,7 @@ final class Bootstrap {
 	 *
 	 * If file is not passed, then project root path with trailing slash.
 	 *
-	 * @param string $file The filename of the project without preceeding slash.
+	 * @param string $file The filename of the project without preceding slash.
 	 * @return string Normalized path with `wp_normalize_path()` function.
 	 * @since 1.0
 	 */
@@ -326,7 +326,7 @@ final class Bootstrap {
 	 *
 	 * If file is not given, then project URL with trailing slash.
 	 *
-	 * @param string $file The filename of the project without preceeding slash.
+	 * @param string $file The filename of the project without preceding slash.
 	 * @return string Escaped URL using `esc_url()` function.
 	 * @since 1.0
 	 */
@@ -343,7 +343,7 @@ final class Bootstrap {
 	/**
 	 * Gets current version of the project.
 	 *
-	 * @param string $file The filename of the project without preceeding slash.
+	 * @param string $file The filename of the project without preceding slash.
 	 * @return string The version number by project type.
 	 * @since 1.0
 	 */
@@ -404,7 +404,7 @@ final class Bootstrap {
 			'preload' => $this->register_script,
 		);
 
-		// Registers styleheet that will be preloaded.
+		// Registers stylesheet that will be preloaded.
 		$this->asset()->add_style( self::STYLE_HANDLE, $style );
 
 		// Registers the global script.

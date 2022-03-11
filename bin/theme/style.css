@@ -1,20 +1,20 @@
 /**
-Theme Name: Awesome WordPress Theme
-Theme URI: https://github.com/thewebsolver/create-wordpress-project
-Author: Shesh Ghimire
-Author URI: https://github.com/hsehszroc
-Description: Starter theme with modern build process. Other comment tags
-             except "Text Domain" and "Domain Path" should be changed manually
-             where applicable.
-Version: 1.0.0
+Theme Name:        Awesome WordPress Theme
+Theme URI:         https://github.com/thewebsolver/create-wordpress-project
+Author:            Shesh Ghimire
+Author URI:        https://github.com/hsehszroc
+Description:       Starter theme with modern build process. Other comment tags
+                   except "Text Domain" and "Domain Path" should be changed manually
+                   where applicable.
+Version:           1.0.0
 Requires at least: 5.3
-Tested up to: 5.9
-Requires PHP: 7.0
-License: GNU General Public License v3.0 (or later)
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
-Text Domain: tws-codegarage
-Domain Path: /languages
-Tags: translation-ready
+Tested up to:      5.9
+Requires PHP:      7.0
+License:           GNU General Public License v3.0 (or later)
+License URI:       https://www.gnu.org/licenses/gpl-3.0.html
+Text Domain:       tws-codegarage
+Domain Path:       /languages
+Tags:              translation-ready
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share

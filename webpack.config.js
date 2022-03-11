@@ -28,7 +28,7 @@ import {
  *
  * If different directory is to be set, change value for `bundlerSrc`
  * present inside `constants.js` instead. That way, all path mapped using
- * that constant gets propogated accordingly.
+ * that constant gets propagated accordingly.
  */
 const entryPath = path.resolve( bundlerSrc );
 
@@ -40,7 +40,7 @@ const entryPath = path.resolve( bundlerSrc );
  *
  * If different directory is to be set, change value for `bundlerDest`
  * present inside `constants.js` instead. That way, all path mapped using
- * that constant gets propogated accordingly.
+ * that constant gets propagated accordingly.
  */
  const destPath = path.resolve( bundlerDest );
 

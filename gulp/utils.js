@@ -13,7 +13,7 @@ import notify from 'gulp-notify';
 import { rootPath } from './constants';
 
 /**
- * Gets dfault configuration.
+ * Gets default configuration.
  *
  * @return {JSON} The config as json.
  */
@@ -37,7 +37,7 @@ export const getMainConfig = ( uncached = false ) => {
 			.replace( /[\s_]+/g, '-' ).replace( /[^a-z0-9-]+/g, '' );
 	}
 
-	// Define understore value for the current project.
+	// Define underscore value for the current project.
 	if ( ! customConfig.core.underscoreCase ) {
 		customConfig.core.underscoreCase = customConfig.core.slug
 			.replace( /-/g, '_' );
@@ -99,7 +99,7 @@ export const backslashToForwardSlash = ( path ) => {
  * Determines if a config value is defined.
  *
  * @param {string} configValueLocation a config value path to search for, e.g. 'config.core.slug'
- * @return {boolean} whethere the config value is defined
+ * @return {boolean} Whether the config value is defined
  */
 export const configValueDefined = ( configValueLocation ) => {
 	// We won't find anything if the location to search is empty.

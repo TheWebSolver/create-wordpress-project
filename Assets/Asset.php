@@ -3,7 +3,7 @@
  * Assets handler.
  *
  * -----------------------------------
- * DEVELOPED-MAINTAINED-SUPPPORTED BY
+ * DEVELOPED-MAINTAINED-SUPPORTED BY
  * -----------------------------------
  * ███║     ███╗   ████████████████
  * ███║     ███║   ═════════██████╗
@@ -539,7 +539,7 @@ class Asset {
 	 *                                    one, which is added to the URL
 	 *                                    as a query string for cache busting purposes.
 	 *                                    If version is set to `false`, a version
-	 *                                    number is auto-generated from project verion.
+	 *                                    number is auto-generated from project version.
 	 *                                    If set to `null`, no version is added.
 	 * @param bool             $in_footer Whether to enqueue the script before `</body>`
 	 *                                  instead of in the `<head>`. Default 'false'.
@@ -635,27 +635,27 @@ class Asset {
 		wp_register_script( $handle, $source, $deps, $version, $in_footer );
 
 		// Only allow "async" to run when there is no deps as it may load before $deps.
-		$attribue = empty( $deps ) && 'async' === $attr ? 'async' : 'defer';
+		$attribute = empty( $deps ) && 'async' === $attr ? 'async' : 'defer';
 
 		// Modern way of handling script files.
 		if ( ! $in_footer ) {
-			wp_script_add_data( $handle, $attribue, true );
+			wp_script_add_data( $handle, $attribute, true );
 
 			// Cache if loaded in async mode.
-			if ( 'async' === $attribue ) {
+			if ( 'async' === $attribute ) {
 				$precache = true;
 			}
 		}
 
 		/**
-		 * Precahce info.
+		 * Precache info.
 		 *
 		 * @link https://gist.github.com/westonruter/caa6e08b8d1f70cd3ddab1064d7d1bc2
 		 */
 		wp_script_add_data( $handle, 'precache', $precache );
-		wp_script_add_data( $handle, 'modern_attribute', $attribue );
+		wp_script_add_data( $handle, 'modern_attribute', $attribute );
 
-		$script['attr']     = $attribue;
+		$script['attr']     = $attribute;
 		$script['data']     = $args;
 		$script['precache'] = $precache;
 		$script['enqueue']  = $enqueue;
@@ -831,7 +831,7 @@ class Asset {
 	/**
 	 * Gets Google Fonts that are included.
 	 *
-	 * It is an associative array wtih:
+	 * It is an associative array with:
 	 * * Font name as index/key.
 	 * * Font variants in an array as value.
 	 *
@@ -883,7 +883,7 @@ class Asset {
 					// Notify that setting string value is the wrong way.
 					_doing_it_wrong(
 						__METHOD__,
-						esc_html__( 'The google font variants must be given as an array value instead of comma separted value.', 'tws-codegarage' ),
+						esc_html__( 'The google font variants must be given as an array value instead of comma separated value.', 'tws-codegarage' ),
 						'1.0'
 					);
 

@@ -4,7 +4,7 @@
  * This script file will be enabled globally by default.
  *
  * -----------------------------------
- * DEVELOPED-MAINTAINED-SUPPPORTED BY
+ * DEVELOPED-MAINTAINED-SUPPORTED BY
  * -----------------------------------
  * ███║     ███╗   ████████████████
  * ███║     ███║   ═════════██████╗

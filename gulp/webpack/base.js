@@ -68,7 +68,7 @@ const minifyBundlerScript = new TerserPlugin( {
 		ie8: false,
 
 		/**
-		 * Mangle (it means rename (minify)) all variable names for futher compression.
+		 * Mangle (it means rename (minify)) all variable names for further compression.
 		 *
 		 * @link https://github.com/terser/terser#mangle-options
 		 */
@@ -95,7 +95,7 @@ const minifyBundlerScript = new TerserPlugin( {
 export const minimizer = [
 	minifyBundlerScript,
 
-	// Add minifiy plugins for other file types (hint: CSSMinimizerWebpackPlugin for stylesheet).
+	// Add minify plugins for other file types (hint: CSSMinimizerWebpackPlugin for stylesheet).
 ];
 
 /**

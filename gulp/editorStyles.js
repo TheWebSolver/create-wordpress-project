@@ -75,7 +75,7 @@ export const lintEditorStyle = () => {
 };
 
 /**
- * Linsts CSS via PostCSS and CSSNext.
+ * Lints CSS via PostCSS and CSSNext.
  *
  * Includes Autoprefixer by default.
  *

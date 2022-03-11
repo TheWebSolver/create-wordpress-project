@@ -261,9 +261,9 @@ export const projectBootstrapped = ( fileBaseName, isSuccess = true, override = 
 				`Did you mean to override the existing file? If so:\n
 					- Set "override" param like so: ${ bold( italic( func ) ) }\n
 					- Function is on file ${ underline( location ) }\n` :
-				'File contents have been overriden if already modified.';
+				'File contents have been overridden if already modified.';
 
-		msg = error( `${ bold( 'INGORE:' ) } ${ currentType } file "${ bold( fileBaseName ) }" already exists: ${ underline( highlight( filePath ) ) }\n
+		msg = error( `${ bold( 'IGNORE:' ) } ${ currentType } file "${ bold( fileBaseName ) }" already exists: ${ underline( highlight( filePath ) ) }\n
 			${ overrideMsg }
 		` );
 	}

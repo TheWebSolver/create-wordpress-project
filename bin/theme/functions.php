@@ -3,8 +3,6 @@
  * Theme functions.
  *
  * @package TheWebSolver\Codegarage\Function
- *
- * something meaningful.
  */
 
 namespace TheWebSolver\Codegarage;

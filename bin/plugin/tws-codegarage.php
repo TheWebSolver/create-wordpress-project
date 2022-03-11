@@ -8,7 +8,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       TheWebSolver Codegarage
- * Plugin URI:        https://github.com/hsehszroc/create-wordpress-project
+ * Plugin URI:        https://github.com/TheWebSolver/create-wordpress-project
  * Description:       An awesome plugin with modern build process.
  * Version:           1.0.0
  * Requires at least: 5.3
@@ -23,6 +23,8 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+
+require_once __DIR__ . '/Includes/Bootstrap.php';
 
 // Load main file.
 \TheWebSolver\Codegarage\Bootstrap::load();

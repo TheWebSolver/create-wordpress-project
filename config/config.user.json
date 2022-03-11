@@ -1,6 +1,6 @@
 {
   "core": {
-    "name": "Awesome WorPress Plugin",
+    "name": "Awesome WordPress Plugin",
     "slug": "awesome-plugin",
     "author": "Awesome Person",
     "PHPNamespace": "Awesome\\Plugin",
