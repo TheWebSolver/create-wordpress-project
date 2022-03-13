@@ -151,7 +151,7 @@
     "gulp": "gulp",
     "webpack": "gulp bundleScripts",
     "generateCert": "gulp generateCert",
-    "rig-init": "npm install && composer install",
+    "toolkit-init": "npm install && composer install",
     "translate": "gulp translate",
     "test:gulp:dev": "jest gulp/tests --testPathIgnorePatterns gulp/tests/prod-build",
     "test:gulp:prod:setup": "cross-env NODE_ENV=production node -r esm gulp/tests/prod-build/prod-build.setup.js",

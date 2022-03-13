@@ -11,7 +11,143 @@ Create WordPress Project is a modern WordPress development and production toolki
 - Prepares **[string][s]** such as namespace, action/filter tags, etc. for branding purposes.
 
 ## Documentation:
-- [GitHub Wiki][w].
+
+### Getting Started
+
+1. #### Setup Config
+	- Do not edit [config.default.json][defcnf] directly.
+	- Any changes to be overridden must be done in [config.user.json][usrcnf] JSON file.
+	- Necessary comments are in place for easier understanding.
+	- The [user configuration][usrcnf] file contains following data:
+
+	```json
+	{
+		// Strings to be replaced during project export.
+		"core": {
+			// Plugin/theme name. Replaces default "TheWebSolver Codegarage".
+			"name": "Awesome WordPress Plugin",
+
+			// Don't use hyphens if theme project. Replaces default "tws-codegarage".
+			// Will be the plugin/theme directory name, plugin main filename and text-domain.
+			"slug": "awesome-plugin",
+
+			// Author name. Replaces default "Shesh Ghimire".
+			"author": "Awesome Person",
+
+			// Namespace and @package prefixes. Replaces default "TheWebSolver\\Codegarage".
+			"PHPNamespace": "Awesome\\Plugin",
+
+			// Underscore case prefix. Used widely as project prefix.
+			// Used for action and filter tags. Replaces default "tws_codegarage".
+			"underscoreCase": "awesome_plugin",
+
+			// Camel case prefix. May be used on scripts. Replaces default "twsCodeGarage".
+			"camelCase": "awesomePlugin",
+
+			// Constants prefix. Replaces default "TWS_CODEGARAGE".
+			"constant": "AWE_PLUG",
+
+			// White label prefix. May be used on styles. Can be used elsewhere.
+			// Replaces default "tws-whitelabel".
+			"whiteLabel": "custom-prefix"
+		},
+
+		"dev": {
+			"browserSync": {
+				// Enable live reloading on each file save.
+				"live": true,
+
+				// The development URL where the project is being developed.
+				"proxyURL": "http://test.tws/",
+
+				// The port where browser sync will proxy the development URL.
+				"bypassPort": "8181",
+
+				// Enable/disable https.
+				"https": false
+			},
+
+			"debug": {
+				// If set to true, no minification happens.
+				"styles": false,
+				"scripts": false,
+
+				// If set to false, PHPCS won't run.
+				"phpcs": true
+			},
+
+			// Path to PHP Code-sniffer installed globally as Composer dev dependency.
+			// Locally installed PHPCS is used (if exists).
+			// Local PHPCS is defined in `./gulp/constants.js` as const "phpcsLocalPath".
+			"phpcsPath": "Awesome\\Plugin\\Path\\To\\Composer\\vendor\\bin\\phpcs"
+		},
+
+		"export": {
+			// Whether current project is a theme.
+			"isTheme": false,
+
+			// Whether to log messages on console during development/production.
+			// Recommended to set it to true to see the progress.
+			"log": true
+		}
+	}
+	```
+
+2. #### Check PHPCS Path
+	Make sure that **PHPCS** path exists either globally or locally to start dev process.
+
+3. #### Start Installation
+	Install node modules and composer packages. You can install it separately or use the npm script to do that.
+
+	From terminal, enter:
+	```sh
+	$ npm run toolkit-init
+	```
+
+4. #### Bootstrap Project
+	To define the project and start development process, enter:
+	```sh
+	$ npm run create-wp-project
+	```
+
+	This will extract appropriate files for the current project from the [***bin***][bin] directory. i.e. If `isTheme` is set to `true` in [user config][usrcnf] file, [theme files][tf] will be extracted, else [plugin files][pf] will be extracted to the root directory of the project.
+
+	Alternatively, following commands can be used for:
+	- Theme project:
+		```sh
+		npm run create-wp-theme
+		```
+
+	- Plugin project:
+		```sh
+		npm run create-wp-plugin
+		```
+
+5. #### Start Development
+	Once everything is set-up and main project files are extracted, then it's time to start the development process.
+
+	From terminal, enter:
+	```sh
+	$ npm run dev
+	```
+
+	During development, following tasks are executed on file save:
+	- Code sniffing (PHP files) and linting (style and script files)
+	- Minification (style and script files)
+	- Compression (images)
+	- Translation `.pot` file
+
+6. #### Export Project
+	From terminal, enter:
+	```sh
+	$ npm run bundle
+	```
+
+	- Project can be exported multiple times.
+	- On each subsequent export, directory gets deleted and everything gets exported again.
+
+### Further Resources
+- [GitHub Wiki][w]
 
 ## Toolkit Plugins:
 | [Gulp]      | [Webpack] | [Autoloader][a] |
@@ -38,3 +174,8 @@ Create WordPress Project is a modern WordPress development and production toolki
 [t]: /gulp 'The Gulp Directory'
 [b]: /gulp/webpack 'The Gulp Webpack Directory'
 [api]: https://github.com/TheWebSolver/create-wordpress-project/wiki/Template-API 'Link to Template API Wiki page'
+[usrcnf]: /config/config.user.json 'The user configuration file'
+[defcnf]: /config/config.default.json 'The default configuration file'
+[bin]: /bin 'The Bin directory'
+[tf]: /bin/theme 'The Theme files bin directory'
+[pf]: /bin/plugin 'The Plugin files bin directory'
