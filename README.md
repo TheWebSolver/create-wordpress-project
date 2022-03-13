@@ -93,10 +93,7 @@ Create WordPress Project is a modern WordPress development and production toolki
 	}
 	```
 
-2. #### Check PHPCS Path
-	Make sure that **PHPCS** path exists either globally or locally to start dev process.
-
-3. #### Start Installation
+2. #### Start Installation
 	Install node modules and composer packages. You can install it separately or use the npm script to do that.
 
 	From terminal, enter:
@@ -104,7 +101,7 @@ Create WordPress Project is a modern WordPress development and production toolki
 	$ npm run toolkit-init
 	```
 
-4. #### Bootstrap Project
+3. #### Bootstrap Project
 	To define the project and start development process, enter:
 	```sh
 	$ npm run create-wp-project
@@ -123,6 +120,9 @@ Create WordPress Project is a modern WordPress development and production toolki
 		npm run create-wp-plugin
 		```
 
+4. #### Check PHPCS Path
+	Make sure that **PHPCS** path exists either globally or locally to start dev process.
+
 5. #### Start Development
 	Once everything is set-up and main project files are extracted, then it's time to start the development process.
 
@@ -131,7 +131,7 @@ Create WordPress Project is a modern WordPress development and production toolki
 	$ npm run dev
 	```
 
-	During development, following tasks are executed on file save:
+	During development, following tasks are executed:
 	- Code sniffing (PHP files) and linting (style and script files)
 	- Minification (style and script files)
 	- Compression (images)
@@ -154,8 +154,8 @@ Create WordPress Project is a modern WordPress development and production toolki
 |-------------|-----------|------------|
 | <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Gulp.js_Logo.svg" height="100px" /> | <img src="https://raw.githubusercontent.com/webpack/media/3e52c178e6ad2428585a2cbf5d22d6dbe0697f0f/logo/icon-square-small.svg" height="100px" /> | <img src="https://avatars.githubusercontent.com/u/71939933?s=200&v=4" height="100px" /> |
 | [Task Runner][t]                 | [File Bundler][b]             | [Classes & Template files][a] |
-| - Watch files during development | - Bundle javascript files     | - Loads Classes, Traits, etc. |
-| - Export project files           | - Mainly for gutenberg blocks | - Exposes Template [API][api] |
+| - Watch files during development | - Bundle javascript files     | - Load Classes, Traits, etc. |
+| - Export project files           | - Mainly for gutenberg blocks | - Expose Template [API][api] |
 
 <!-- MARKDOWN LINKS -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
