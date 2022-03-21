@@ -101,14 +101,6 @@ final class Bootstrap {
 	const STYLE_HANDLE = 'tws-codegarage-style';
 
 	/**
-	 * Whether script should be registered or not.
-	 *
-	 * @var bool
-	 * @since 1.0
-	 */
-	public $register_script = false;
-
-	/**
 	 * Loads instance.
 	 *
 	 * @return Bootstrap
@@ -143,20 +135,14 @@ final class Bootstrap {
 	 */
 	private function setup() {
 		self::$instance = $this;
-		$is_plugin      = $this->is_plugin();
-
-		// Setup project path.
-		$this->root = $is_plugin
-			? plugin_dir_path( dirname( __FILE__ ) )
-			: get_theme_file_path();
 
 		// Setup project URI.
-		$this->url = $is_plugin
+		$this->url = $this->is_plugin()
 			? plugin_dir_url( dirname( __FILE__ ) )
 			: get_theme_file_uri();
 
 		// Setup autoloader.
-		require_once $this->root . '/autoload.php';
+		require_once $this->path( 'autoload.php' );
 
 		/**
 		 * Setup namespace mapping to directories.
@@ -167,11 +153,11 @@ final class Bootstrap {
 		 * @link https://getcomposer.org/doc/04-schema.md#psr-4
 		 * @example Schema
 		 * Below sequence is for the "Assets" (not "Includes") `$paths`.
-		 * It is because Assets.php file exist in the project
+		 * It is because Asset.php file exist in the project
 		 * by default and it will be autoloaded once bootstrapped
 		 * like so: `$this->asset = Asset::load()`.
 		 *
-		 * - `Assets.php` file is inside `Assets` directory.
+		 * - `Asset.php` file is inside `Asset` directory.
 		 * - namespace must be `TheWebSolver\Codegarage`.
 		 * - classname must be `Assets` (same as filename).
 		 * - Autoload path will then be `$rootpath/Assets/Assets.php`.
@@ -187,12 +173,12 @@ final class Bootstrap {
 		$loader = new Autoloader();
 
 		// Start autoloading.
-		$loader->root( $this->root )->path( $map )->register();
+		$loader->root( $this->path() )->path( $map )->register();
 
 		$this->loader = $loader;
 		$this->asset  = Asset::load();
 
-		// Setup WordPress hooks.
+		// Init project.
 		$this->init();
 
 		/**
@@ -245,9 +231,10 @@ final class Bootstrap {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
-		$project_dir  = basename( dirname( __DIR__ ) ); // Plugin root folder name.
-		$plugin_file  = 'tws-codegarage.php'; // Plugin main file name.
-		$project_file = wp_normalize_path( WP_PLUGIN_DIR . "/$project_dir/$plugin_file" );
+		$this->root   = dirname( __DIR__ );
+		$project_dir  = $this->dirname();
+		$plugin_file  = 'tws-codegarage.php';
+		$project_file = WP_PLUGIN_DIR . "/$project_dir/$plugin_file";
 
 		if ( file_exists( $project_file ) ) {
 			$plugin = get_plugin_data( $project_file, false );
@@ -263,7 +250,7 @@ final class Bootstrap {
 		}
 
 		// TODO: Review getting theme data later.
-		$theme = wp_get_theme( '', dirname( __DIR__ ) );
+		$theme = wp_get_theme( '', $this->path() );
 
 		if ( $theme instanceof WP_Theme ) {
 			// Get all data when called upon.
@@ -312,10 +299,10 @@ final class Bootstrap {
 	 * @since 1.0
 	 */
 	public function path( string $file = '' ): string {
-		$path = $this->root;
+		$path = trailingslashit( $this->root );
 
 		if ( $file ) {
-			$path .= $file;
+			$path .= untrailingslashit( $file );
 		}
 
 		return wp_normalize_path( $path );
@@ -334,10 +321,20 @@ final class Bootstrap {
 		$url = trailingslashit( $this->url );
 
 		if ( $file ) {
-			$url .= $file;
+			$url .= untrailingslashit( $file );
 		}
 
 		return esc_url( $url );
+	}
+
+	/**
+	 * Gets project directory name.
+	 *
+	 * @return string
+	 * @since 1.0
+	 */
+	public function dirname(): string {
+		return basename( $this->path() );
 	}
 
 	/**
@@ -371,46 +368,11 @@ final class Bootstrap {
 	}
 
 	/**
-	 * Inits WordPress hooks.
+	 * Inits project tasks.
 	 *
 	 * @since 1.0
 	 */
 	private function init() {
-		add_action( 'wp_loaded', array( $this, 'load_hooks' ) );
-	}
 
-	/**
-	 * Sets hook.
-	 *
-	 * @since 1.0
-	 */
-	public function load_hooks() {
-		$deps  = array( 'jquery' );
-		$l10n  = array( 'adminUrl' => admin_url() );
-		$style = array(
-			'file'    => 'style.min.css',
-			'front'   => true,
-			'admin'   => true,
-			'block'   => false,
-			'preload' => true,
-		);
-
-		$script = array(
-			'file'    => 'script.min.js',
-			'global'  => true,
-			'front'   => true,
-			'admin'   => true,
-			'block'   => false,
-			'preload' => $this->register_script,
-		);
-
-		// Registers stylesheet that will be preloaded.
-		$this->asset()->add_style( self::STYLE_HANDLE, $style );
-
-		// Registers the global script.
-		$this->asset()->register_script( self::SCRIPT_HANDLE, $script, $deps, false, true, false );
-
-		// Localizes data to the global script.
-		$this->asset()->localize_script( self::SCRIPT_HANDLE, 'awesome', $l10n );
 	}
 }
