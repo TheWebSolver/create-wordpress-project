@@ -397,7 +397,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 		 * @since 1.0
 		 */
 		public function default_path(): string {
-			return apply_filters( 'tws_default_template_path_' . $this->dir, 'templates/thewebsolver/' );
+			return apply_filters( 'tws_default_template_path_' . $this->dir, 'templates/' . $this->dir . '/' );
 		}
 
 		/**
@@ -435,6 +435,9 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 			/**
 			 * WPHOOK: Filter -> Send back the located template file.
 			 *
+			 * @param string $template      The located template file.
+			 * @param string $template_name The template file name.
+			 * @param string $template_path The template path passed as param.
 			 * @since 1.0
 			 */
 			return apply_filters( 'tws_locate_template_file_' . $this->dir, $template, $template_name, $template_path );
@@ -453,24 +456,32 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 				extract( $args ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 			}
 
-			// Prepare template part.
-			$template = '';
-
 			/**
 			 * Look in yourtheme/{dirname}/slug-name.php and yourtheme/{dirname}/slug.php.
-			 * Here the {dirname} defaults to "thewebsolver" unless used filter to change it.
+			 *
+			 * - {dirname} defaults to "templates/{$this->dir}/" unless used filter to change it.
+			 * - $this->dir is the project directory name and can be:
+			 *   - in dev env: `create-wordpress-project`
+			 *   - after bundle: user provided `config.core.slug` value from config.user.json file.
+			 *
+			 * @var string
 			 */
 			$template = locate_template(
 				array(
-					$this->default_path() . "{$slug}-{$name}.php",
-					$this->default_path() . "{$slug}.php",
+					$this->default_path() . "parts/{$slug}-{$name}.php",
+					$this->default_path() . "parts/{$slug}.php",
 				)
 			);
 
 			/**
 			 * WPHOOK: Filter -> change the template directory path.
 			 *
-			 * @var string
+			 * Defaults to `$this->root/template-parts`.
+			 *
+			 * @param string $default_path The default template path.
+			 * @param string $template     The located template file in themes.
+			 * @param array  $args         The template args.
+			 * @var   string
 			 * @since 1.0
 			 */
 			$template_path = apply_filters( 'tws_locate_template_path_' . $this->dir, $this->root . '/template-parts', $template, $args );
@@ -487,7 +498,10 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 			/**
 			 * WPHOOK: Filter -> change template part files from 3rd-party plugins.
 			 *
-			 * @var string
+			 * @param string $template The located template file.
+			 * @param string $slug     The first part of template file name from param.
+			 * @param string $name     The second part of the template file name after `-` from param.
+			 * @var   string
 			 * @since 1.0
 			 */
 			$template = apply_filters( 'tws_locate_template_part_' . $this->dir, $template, $slug, $name );
@@ -517,10 +531,10 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 			/**
 			 * WPHOOK: Action -> Fires before getting template file.
 			 *
-			 * @param string $template_name
-			 * @param string $template_path
-			 * @param string $located
-			 * @param array  $args
+			 * @param string $template_name The template file name from param.
+			 * @param string $template_path The template path from param.
+			 * @param string $located       The located file path.
+			 * @param array  $args          The arguments to be passed to template file from param.
 			 * @since 1.0
 			 */
 			do_action( 'tws_before_get_template_' . $this->dir, $template_name, $template_path, $located, $args );
@@ -538,10 +552,10 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 			/**
 			 * WPHOOK: Action -> Fires after getting template file.
 			 *
-			 * @param string $template_name
-			 * @param string $template_path
-			 * @param string $located
-			 * @param array  $args
+			 * @param string $template_name The template file name from param.
+			 * @param string $template_path The template path from param.
+			 * @param string $located       The located file path.
+			 * @param array  $args          The arguments to be passed to template file from param.
 			 * @since 1.0
 			 */
 			do_action( 'tws_after_get_template_' . $this->dir, $template_name, $template_path, $located, $args );
