@@ -24,13 +24,7 @@ namespace TheWebSolver\Codegarage;
  * Asset class.
  */
 class Asset {
-	/**
-	 * Asset instance.
-	 *
-	 * @var Asset
-	 * @since 1.0
-	 */
-	private static $instance;
+	use Singleton;
 
 	/**
 	 * Associative array of Google Fonts to load.
@@ -77,27 +71,11 @@ class Asset {
 	private $localized;
 
 	/**
-	 * Loads asset instance.
-	 *
-	 * @return Asset
-	 * @since 1.0
-	 */
-	public static function load(): Asset {
-		if ( null !== self::$instance ) {
-			return self::$instance;
-		}
-
-		self::$instance = new self();
-
-		return self::$instance;
-	}
-
-	/**
 	 * Asset constructor.
 	 *
 	 * @since 1.0
 	 */
-	private function __construct() {
+	protected function __construct() {
 		if ( Bootstrap::load()->is_plugin() ) {
 			add_filter( 'mce_css', array( $this, 'filter_editor_styles' ) );
 		} else {
@@ -105,14 +83,14 @@ class Asset {
 		}
 
 		// Stylesheets.
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 99 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles' ), 99 );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_styles' ), 99 );
 
 		// Scripts.
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 99 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ), 99 );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_scripts' ), 99 );
 		add_filter( 'wp_resource_hints', array( $this, 'resource_hints' ), 10, 2 );
 
 		/**
@@ -202,6 +180,8 @@ class Asset {
 	 *
 	 * Stylesheets that are global are enqueued.
 	 * All other stylesheets are only registered, to be enqueued later.
+	 *
+	 * @since 1.0
 	 */
 	public function enqueue_styles() {
 		// Enqueue Google Fonts.
@@ -291,6 +271,7 @@ class Asset {
 	 * Preloading is disabled when AMP is active, as AMP injects the stylesheets inline.
 	 *
 	 * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
+	 * @since 1.0
 	 */
 	public function preload_styles() {
 		// Bail early if preloading is disabled.
@@ -325,6 +306,8 @@ class Asset {
 
 	/**
 	 * Enqueues WordPress theme styles for the editor.
+	 *
+	 * @since 1.0
 	 */
 	public function add_editor_styles() {
 		$url = $this->google_fonts();
@@ -417,6 +400,7 @@ class Asset {
 	 * {@see 'tws_codegarage_preloading_styles_enabled'} filter can be used to tweak the return value.
 	 *
 	 * @return bool True if preloading stylesheets and injecting them is enabled, false otherwise.
+	 * @since 1.0
 	 */
 	private function has_preload(): bool {
 		/**
@@ -776,6 +760,7 @@ class Asset {
 	 * @param string|null $handle  The handle name.
 	 * @param string      $method  The method where wrong call made.
 	 * @return array
+	 * @since 1.0
 	 */
 	private function get_script( array $scripts, $handle, string $method ): array {
 		// Get all scripts if no handle given.
@@ -912,6 +897,7 @@ class Asset {
 	 * Note that this must only be called after the parse_query action.
 	 *
 	 * @return bool Whether the AMP plugin is active and the current request is for an AMP endpoint.
+	 * @since 1.0
 	 */
 	public function is_amp() : bool {
 		return function_exists( 'is_amp_endpoint' ) && \is_amp_endpoint();
