@@ -199,14 +199,8 @@ class Asset {
 		$path = Bootstrap::load()->path();
 
 		if ( ! $path ) {
-			_doing_it_wrong(
-				__METHOD__,
-				sprintf(
-					'The stylesheet path "%s" could not be found.',
-					esc_html( $path )
-				),
-				'1.0'
-			);
+			/* translators: %s The stylesheet path */
+			_doing_it_wrong( __METHOD__, esc_html( sprintf( __( 'The stylesheet path "%s" could not be found.', 'tws-codegarage' ), $path ) ), '1.0' );
 
 			return;
 		}
@@ -356,7 +350,7 @@ class Asset {
 		// Check if not set globally and hasn't been enqueued already.
 		if ( ! $is_valid && ! wp_style_is( $handle ) ) {
 			/* translators: %s: stylesheet handle */
-			_doing_it_wrong( __METHOD__, esc_html( sprintf( __( 'Invalid theme stylesheet handle: %s', 'tws-codegarage' ), $handle ) ), '1.0' );
+			_doing_it_wrong( __METHOD__, esc_html( sprintf( __( 'Invalid stylesheet handle: %s', 'tws-codegarage' ), $handle ) ), '1.0' );
 		}
 
 		return $is_valid;
@@ -543,13 +537,7 @@ class Asset {
 
 		// Bail if file not given.
 		if ( ! isset( $args['file'] ) ) {
-			_doing_it_wrong(
-				__METHOD__,
-				esc_html(
-					__( "The 'file' param with filename relative to Assets/JS directory must be passed to register the script.", 'tws-codegarage' )
-				),
-				'1.0'
-			);
+			_doing_it_wrong( __METHOD__, esc_html__( "The 'file' param with filename relative to Assets/JS directory must be passed to register the script.", 'tws-codegarage' ), '1.0' );
 
 			return;
 		}
@@ -564,11 +552,7 @@ class Asset {
 		 * @filesource wp-includes\class.wp-scripts.php.
 		 */
 		if ( ! did_action( 'wp_loaded' ) ) {
-			_doing_it_wrong(
-				__METHOD__,
-				esc_html__( 'Scripts must be registered only after "wp_loaded" action hook.', 'tws-codegarage' ),
-				'1.0'
-			);
+			_doing_it_wrong( __METHOD__, esc_html__( 'Scripts must be registered only after "wp_loaded" action hook.', 'tws-codegarage' ), '1.0' );
 
 			return;
 		}
@@ -769,17 +753,12 @@ class Asset {
 		}
 
 		if ( ! isset( $scripts[ $handle ] ) ) {
-			// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 			_doing_it_wrong(
-				$method,
-				sprintf(
-					/* translators: %s: The script handle name */
-					__( 'The registered script not found for the handle: "%s"', 'tws-codegarage' ),
-					$handle
-				),
+				esc_html( $method ),
+				/* translators: %s: The script handle name */
+				esc_html( sprintf( __( 'The registered script not found for the handle: "%s"', 'tws-codegarage' ), $handle ) ),
 				'1.0'
 			);
-			// phpcs:enable
 
 			return array();
 		}
@@ -865,12 +844,7 @@ class Asset {
 		foreach ( $fonts as $name => $types ) {
 			if ( ! empty( $types ) ) {
 				if ( ! is_array( $types ) ) {
-					// Notify that setting string value is the wrong way.
-					_doing_it_wrong(
-						__METHOD__,
-						esc_html__( 'The google font variants must be given as an array value instead of comma separated value.', 'tws-codegarage' ),
-						'1.0'
-					);
+					_doing_it_wrong( __METHOD__, esc_html__( 'The google font variants must be given as an array value instead of comma separated value.', 'tws-codegarage' ), '1.0' );
 
 					$types = explode( ',', str_replace( ' ', '', $types ) );
 				}
