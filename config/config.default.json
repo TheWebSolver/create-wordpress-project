@@ -5,7 +5,7 @@
     "author": "Shesh Ghimire",
     "PHPNamespace": "TheWebSolver\\Codegarage",
     "underscoreCase": "tws_codegarage",
-    "camelCase": "twsCodeGarage",
+    "camelCase": "twsCodegarage",
     "constant": "TWS_CODEGARAGE",
     "whiteLabel": "tws-whitelabel"
   },

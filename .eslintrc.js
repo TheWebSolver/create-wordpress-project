@@ -9,7 +9,7 @@ module.exports = {
 	"globals": {
 		"jQuery": "readonly",
 		"wp": "readonly",
-		"tws": "readonly"
+		"twsCodegarage": "readonly"
 	},
 	"rules": {
 		"no-unused-vars": "off",

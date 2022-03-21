@@ -153,8 +153,8 @@ export const nameFieldDefaults = {
 	name: 'TheWebSolver Codegarage',
 	underscoreCase: 'tws_codegarage',
 	constant: 'TWS_CODEGARAGE',
-	camelCase: 'twsCodeGarage',
-	camelCaseVar: 'twsCodeGarage',
+	camelCase: 'twsCodegarage',
+	camelCaseVar: 'twsCodegarage',
 };
 
 // Only whitelabel if config has set any value.
