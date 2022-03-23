@@ -165,11 +165,15 @@ export const getPostCSSAtImport = AtImport( {
 } );
 
 /**
- * Lints styles.
+ * Processes styles.
+ *
+ * - Apply stylelint.
+ * - PostCSS preset env (imports stylesheet files).
+ * - Minify CSS.
  *
  * @return {Object} Pumpify pipeline object.
  */
-export const lintStyle = () => {
+export const processStyle = () => {
 	const postcssPlugins = [
 		stylelint(),
 		postcssPresetEnv( getPresetEnv() ),
@@ -207,8 +211,8 @@ export const lintStyle = () => {
 const styles = () => {
 	return src( paths.styles.src, { sourcemaps } )
 		.pipe( sniffStyle() )
+		.pipe( processStyle() )
 		.pipe( gulpIf( isProd, startStringReplace() ) )
-		.pipe( lintStyle() )
 		.pipe( dest( paths.styles.dest, { sourcemaps } ) );
 };
 

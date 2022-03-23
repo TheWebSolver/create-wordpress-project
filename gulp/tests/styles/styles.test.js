@@ -19,7 +19,7 @@ import fs from 'fs';
  */
 import { gulpTestPath } from '../../constants';
 import { getMainConfig, getDefaultConfig } from '../../utils';
-import { lintStyle } from '../../styles';
+import { processStyle } from '../../styles';
 
 function makeMockFiles() {
 	return [
@@ -45,7 +45,7 @@ test( 'nesting', ( done ) => {
 
 	pump( [
 		from.obj( mockFiles ),
-		lintStyle(),
+		processStyle(),
 		concat( assert ),
 	], done );
 } );
@@ -66,7 +66,7 @@ test( 'Partials are imported.', ( done ) => {
 
 	pump( [
 		from.obj( mockFiles ),
-		lintStyle(),
+		processStyle(),
 		concat( assert ),
 	], done );
 } );
@@ -87,7 +87,7 @@ test( 'Custom properties processed.', ( done ) => {
 
 	pump( [
 		from.obj( mockFiles ),
-		lintStyle(),
+		processStyle(),
 		concat( assert ),
 	], done );
 } );
@@ -107,7 +107,7 @@ test( 'Custom media is processed.', ( done ) => {
 
 	pump( [
 		from.obj( mockFiles ),
-		lintStyle(),
+		processStyle(),
 		concat( assert ),
 	], done );
 } );
@@ -130,7 +130,7 @@ test( 'Minifies by default.', ( done ) => {
 
 	pump( [
 		from.obj( mockFiles ),
-		lintStyle(),
+		processStyle(),
 		concat( assert ),
 	], done );
 } );
@@ -150,7 +150,7 @@ test( 'Debug config disables minify.', ( done ) => {
 
 	pump( [
 		from.obj( mockFiles ),
-		lintStyle(),
+		processStyle(),
 		concat( assert ),
 	], done );
 } );
@@ -169,7 +169,7 @@ test( 'IE grid prefix if configured.', ( done ) => {
 
 	pump( [
 		from.obj( mockFiles ),
-		lintStyle(),
+		processStyle(),
 		concat( assert ),
 	], done );
 } );
@@ -190,7 +190,7 @@ test( 'No IE grid prefix by default.', ( done ) => {
 
 	pump( [
 		from.obj( mockFiles ),
-		lintStyle(),
+		processStyle(),
 		concat( assert ),
 	], done );
 } );

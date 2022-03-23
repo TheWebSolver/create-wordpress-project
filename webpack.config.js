@@ -42,7 +42,7 @@ const entryPath = path.resolve( bundlerSrc );
  * present inside `constants.js` instead. That way, all path mapped using
  * that constant gets propagated accordingly.
  */
- const destPath = path.resolve( bundlerDest );
+const destPath = path.resolve( bundlerDest );
 
 /**
  * The entry files.
