@@ -689,7 +689,7 @@ class Asset {
 			wp_enqueue_script( $handle );
 
 			// Add localized script, if any.
-			if ( ! empty( $script = $this->localized_scripts( $handle ) ) ) {
+			if ( isset( $this->localized[ $handle ] ) && ! empty( $script = $this->localized_scripts( $handle ) ) ) {
 				wp_localize_script( $handle, $script['name'], $script['l10n'] );
 			}
 		}
