@@ -50,7 +50,7 @@ final class Bootstrap {
 	 * @var string
 	 * @since 1.0
 	 */
-	private $project_type = 'plugin';
+	private $type = 'plugin';
 
 	/**
 	 * Root path.
@@ -107,23 +107,24 @@ final class Bootstrap {
 	 * @since 1.0
 	 */
 	public static function load() {
-		// Bail early if already bootstrapped.
-		if ( null !== self::$instance ) {
-			return self::$instance;
-		}
+		return null !== self::$instance ? self::$instance : ( self::$instance = new self() );
+	}
 
-		// Bootstrap.
-		$project = new self();
+	/**
+	 * Starts project.
+	 *
+	 * @param string $root The project root path.
+	 * @param string $type The project type.
+	 * @since 1.0
+	 */
+	public function platform( string $root, string $type ) {
+		$file          = dirname( __FILE__ );
+		$this->root    = $root;
+		$this->type    = $type;
+		$this->project = $this->project( false );
+		$this->url     = $this->is_plugin() ? plugin_dir_url( $file ) : get_theme_file_uri();
 
-		// Set project.
-		$project->project = $project->project( false );
-
-		// Verify if project is valid before continuing any further.
-		if ( $project->is_valid() ) {
-			$project->setup();
-		}
-
-		return $project;
+		$this->setup();
 	}
 
 	/**
@@ -134,14 +135,6 @@ final class Bootstrap {
 	 * @since 1.0
 	 */
 	private function setup() {
-		self::$instance = $this;
-
-		// Setup project URI.
-		$this->url = $this->is_plugin()
-			? plugin_dir_url( dirname( __FILE__ ) )
-			: get_theme_file_uri();
-
-		// Setup autoloader.
 		require_once $this->path( 'autoload.php' );
 
 		/**
@@ -157,16 +150,16 @@ final class Bootstrap {
 		 * by default and it will be autoloaded once bootstrapped
 		 * like so: `$this->asset = Asset::load()`.
 		 *
-		 * - `Asset.php` file is inside `Asset` directory.
+		 * - `Asset.php` file is inside `Assets` directory.
 		 * - namespace must be `TheWebSolver\Codegarage`.
-		 * - classname must be `Assets` (same as filename).
-		 * - Autoload path will then be `$rootpath/Assets/Assets.php`.
+		 * - classname must be `Asset` (same as filename without `.php` extension).
+		 * - Autoload path will then be `{$this->root}/Assets/Asset.php`.
 		 *
 		 * Another example with nested directory and different filename.
 		 * - `Asset_Handler.php` file is inside `Assets/PHP` directory.
 		 * - namespace must be `TheWebSolver\Codegarage\PHP`.
-		 * - classname must be `Asset_Handler` (same as filename).
-		 * - Autoload path will then be `$rootpath/Assets/PHP/Asset_Handler.php`.
+		 * - classname must be `Asset_Handler` (same as filename without `.php` extension).
+		 * - Autoload path will then be `{$this->root}/Assets/PHP/Asset_Handler.php`.
 		 */
 		$paths  = array( 'Assets', 'Includes' );
 		$map    = array( __NAMESPACE__ => $paths );
@@ -191,39 +184,12 @@ final class Bootstrap {
 	}
 
 	/**
-	 * Determines whether current project is a valid project.
-	 *
-	 * - `Bootstrap::project()` is an array, then project is a plugin.
-	 * - `Bootstrap::project()` is an object (`WP_Theme` instance), then project is a theme.
-	 *
-	 * @return bool
-	 * @since 1.0
-	 */
-	private function is_valid() {
-		$valid = ( is_array( $this->project ) && ! empty( $this->project ) ) || is_object( $this->project );
-
-		// Shutdown further execution if not in plugins or themes folder.
-		if ( ! $valid ) {
-			wp_die(
-				esc_html__( 'The build process should either be in plugins or themes directory.', 'tws-codegarage' ),
-				esc_html__( 'Project directory not valid', 'tws-codegarage' ),
-				400
-			);
-		}
-
-		// Set project type once verified that it is a valid project.
-		if ( is_object( $this->project ) ) {
-			$this->project_type = 'theme';
-		}
-
-		return $valid;
-	}
-
-	/**
 	 * Gets project data.
 	 *
-	 * @param string|false $key The specific product data value. False to get all data.
-	 * @return array|string|WP_Theme|int If nothing found, then `-1`.
+	 * WordPress dies if project is not in `plugins` or `themes` directory structure.
+	 *
+	 * @param string|false $key The specific product data value. `false` to get all data.
+	 * @return array|string|WP_Theme
 	 * @since 1.0
 	 */
 	public function project( $key = 'Version' ) {
@@ -231,10 +197,9 @@ final class Bootstrap {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
-		$this->root   = dirname( __DIR__ );
+		$domain       = 'tws-codegarage';
 		$project_dir  = $this->dirname();
-		$plugin_file  = 'tws-codegarage.php';
-		$project_file = WP_PLUGIN_DIR . "/$project_dir/$plugin_file";
+		$project_file = WP_PLUGIN_DIR . "/{$project_dir}/{$domain}.php";
 
 		if ( file_exists( $project_file ) ) {
 			$plugin = get_plugin_data( $project_file, false );
@@ -249,24 +214,27 @@ final class Bootstrap {
 			}
 		}
 
-		// TODO: Review getting theme data later.
-		$theme = wp_get_theme( '', $this->path() );
+		$theme = wp_get_theme( $domain );
 
-		if ( $theme instanceof WP_Theme ) {
+		if ( $theme->exists() ) {
 			// Get all data when called upon.
 			if ( false === $key ) {
 				return $theme;
 			}
 
-			if ( method_exists( $theme, 'get' ) ) {
-				$val = $theme->get( $key );
+			$val = $theme->get( $key );
 
-				return false !== $val ? $val : '';
-			}
+			return false !== $val ? $val : '';
 		}
 
 		// Flag that project is not valid.
-		return -1;
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+		wp_die(
+			__( 'The build process should either be inside "plugins" or "themes" directory.', 'tws-codegarage' ),
+			__( 'Project directory not valid', 'tws-codegarage' ),
+			400
+		);
+		// phpcs:enable
 	}
 
 	/**
@@ -276,7 +244,7 @@ final class Bootstrap {
 	 * @since 1.0
 	 */
 	public function project_type(): string {
-		return $this->project_type;
+		return $this->type;
 	}
 
 	/**
@@ -286,7 +254,7 @@ final class Bootstrap {
 	 * @since 1.0
 	 */
 	public function is_plugin(): bool {
-		return 'plugin' === $this->project_type;
+		return 'plugin' === $this->project_type();
 	}
 
 	/**

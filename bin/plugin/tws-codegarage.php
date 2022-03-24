@@ -27,4 +27,4 @@ defined( 'ABSPATH' ) || exit;
 require_once __DIR__ . '/Includes/Bootstrap.php';
 
 // Load main file.
-\TheWebSolver\Codegarage\Bootstrap::load();
+\TheWebSolver\Codegarage\Bootstrap::load()->platform( __DIR__, 'plugin' );
