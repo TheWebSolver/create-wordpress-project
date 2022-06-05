@@ -459,7 +459,7 @@ class Asset {
 
 		$css_files = array(
 			// Default CSS to be called on every page.
-			'tws-codegarage-style' => array(
+			Bootstrap::STYLE_HANDLE => array(
 				'file'    => 'style.min.css',
 				'global'  => true,
 				'front'   => true,
@@ -503,7 +503,7 @@ class Asset {
 	 * @param string           $handle    Name of the script. Should be unique.
 	 * @param array            $args      The script args with index as:
 	 * * `string`        `file`    - The file relative to `Assets/JS` directory.
-	 *                               Pass the `*.min.js` filename.
+	 *                               Pass the `*.min.js` filename. Full URL if external file.
 	 * * `bool`          `global`  - Whether to enqueue on all pages. Default `false`.
 	 *                               If set to `true`, `preload` has no effect.
 	 * * `bool`          `front`   - Add on site frontend. Default `true`.
@@ -552,7 +552,8 @@ class Asset {
 		 * @filesource wp-includes\class.wp-scripts.php.
 		 */
 		if ( ! did_action( 'wp_loaded' ) ) {
-			_doing_it_wrong( __METHOD__, esc_html__( 'Scripts must be registered only after "wp_loaded" action hook.', 'tws-codegarage' ), '1.0' );
+			/* translators: %s: The script handle */
+			_doing_it_wrong( __METHOD__, esc_html( sprintf( __( 'Scripts must be registered only after `wp_loaded` action hook. Script handle: `%s`', 'tws-codegarage' ), $handle ) ), '1.0' );
 
 			return;
 		}

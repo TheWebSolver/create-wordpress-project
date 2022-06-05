@@ -85,6 +85,13 @@ final class Bootstrap {
 	public $loader;
 
 	/**
+	 * Project callable classes.
+	 *
+	 * @var string[]
+	 */
+	private $call = array();
+
+	/**
 	 * Global script handle.
 	 *
 	 * @var string
@@ -107,7 +114,7 @@ final class Bootstrap {
 	 * @since 1.0
 	 */
 	public static function load() {
-		return null !== self::$instance ? self::$instance : ( self::$instance = new self() );
+		return self::$instance ?: ( self::$instance = new self() );
 	}
 
 	/**
@@ -115,9 +122,10 @@ final class Bootstrap {
 	 *
 	 * @param string $root The project root path.
 	 * @param string $type The project type.
+	 * @return Bootstrap
 	 * @since 1.0
 	 */
-	public function platform( string $root, string $type ) {
+	public function platform( string $root, string $type ): Bootstrap {
 		$file          = dirname( __FILE__ );
 		$this->root    = $root;
 		$this->type    = $type;
@@ -125,6 +133,8 @@ final class Bootstrap {
 		$this->url     = $this->is_plugin() ? plugin_dir_url( $file ) : get_theme_file_uri();
 
 		$this->setup();
+
+		return $this;
 	}
 
 	/**
@@ -170,9 +180,6 @@ final class Bootstrap {
 
 		$this->loader = $loader;
 		$this->asset  = Asset::load();
-
-		// Init project.
-		$this->init();
 
 		/**
 		 * WPHOOK: Action -> Fires after everything is loaded.
@@ -336,11 +343,48 @@ final class Bootstrap {
 	}
 
 	/**
-	 * Inits project tasks.
+	 * Sets additional class components to be instantiated.
+	 *
+	 * Use this method to instantiate classes early in the request lifecycle.
+	 * Mainly used in the main file of a plugin or in the functions.php file of a theme.
+	 *
+	 * Only pass the full namespaced classname. Class will then be instantiated either:
+	 * - being a non-singleton pattern, or
+	 * - being singleton pattern using project's `Singleton` trait.
+	 *
+	 * @param string ...$name The classnames with full namespace.
+	 * @return Bootstrap
+	 * @since 1.0
+	 */
+	public function class( string ...$name ): Bootstrap {
+		$this->call = $name;
+
+		return $this;
+	}
+
+	/**
+	 * Starts project class instantiation.
+	 *
+	 * Only run this method after all classes are set using {@method Bootstrap::class()}.
 	 *
 	 * @since 1.0
 	 */
-	private function init() {
+	public function start() {
+		if ( empty( $this->call ) ) {
+			return;
+		}
 
+		foreach ( $this->call as $class ) {
+			// Ignore string not that is not a class.
+			if ( ! class_exists( $class, true ) ) {
+				continue;
+			}
+
+			if ( is_callable( array( $class, 'load' ), false, $name ) ) {
+				call_user_func( $name );
+			} else {
+				new $class();
+			}
+		}
 	}
 }

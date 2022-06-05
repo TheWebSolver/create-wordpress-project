@@ -8,7 +8,7 @@
 	<!-- See https://tommcfarlin.com/php-codesniffer-in-visual-studio-code/ -->
 
 	<!-- Set a description for this ruleset. -->
-	<description>A custom set of code standard rules to check for Create WordPress Project toolkit.</description>
+	<description>A custom set of code standard rules to check for WordPress development.</description>
 
 
 	<!--
@@ -63,12 +63,13 @@
 
 	<!--
 		Verify that the text_domain is set to the desired text-domain.
-		Add as many element to support multiple text domains.
+		Multiple valid text domains can be provided as a comma-delimited list.
+
+		Add as many elements to support multiple text domains.
 	-->
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-			<!-- The default textdomain during development process. -->
 				<element value="tws-codegarage"/>
 			</property>
 		</properties>
@@ -113,16 +114,33 @@
 		- When variable needs to be assigned in the condition.
 	-->
 	<rule ref="WordPress.CodeAnalysis.AssignmentInCondition">
-		<!-- Allow multiple assignment in the condition. -->
+		<!--
+			Allow variable assignment in the condition.
+			Eg: if( $x = file_exists( $y ) ) { require $x; }
+		-->
 		<exclude name="WordPress.CodeAnalysis.AssignmentInCondition.Found" />
 	</rule>
 
 	<rule ref="Squiz.PHP.DisallowMultipleAssignments">
-		<!-- Allow assignment in the control structure. -->
+		<!--
+			Allow assignment in the control structure.
+			Eg: if( $x = adding( $y + $z ) > 0 ) { return $x; }
+		-->
 		<exclude name="Squiz.PHP.DisallowMultipleAssignments.FoundInControlStructure" />
 
-		<!-- Allow multiple assignment in the same line. -->
+		<!--
+			Allow multiple assignment in the same line.
+			Eg: $x = $y = 'value'
+		-->
 		<exclude name="Squiz.PHP.DisallowMultipleAssignments.Found" />
+	</rule>
+
+	<rule ref="WordPress.PHP.DisallowShortTernary">
+		<!--
+			Allow short ternary operator.
+			Eg: $x ?: $y
+		-->
+		<exclude name="WordPress.PHP.DisallowShortTernary.Found" />
 	</rule>
 
 	<!--

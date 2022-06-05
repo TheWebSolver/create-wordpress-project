@@ -7,12 +7,20 @@
 
 namespace TheWebSolver\Codegarage;
 
-defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
-require_once __DIR__ . '/Includes/Bootstrap.php';
+require __DIR__ . '/Includes/Bootstrap.php';
 
 // Load main file.
 Bootstrap::load()->platform( __DIR__, 'theme' );
+
+/**
+ * Load project related files and start.
+ *
+ * @see Bootstrap::class()
+ * @see Bootstrap::start()
+ */
 
 /**
  * Gets pagination text and arrows.
