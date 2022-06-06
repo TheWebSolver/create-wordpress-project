@@ -195,7 +195,7 @@ final class Bootstrap {
 	 *
 	 * WordPress dies if project is not in `plugins` or `themes` directory structure.
 	 *
-	 * @param string|false $key The specific product data value. `false` to get all data.
+	 * @param string|false $key The specific project data. `false` to get all data.
 	 * @return array|string|WP_Theme
 	 * @since 1.0
 	 */
@@ -204,34 +204,25 @@ final class Bootstrap {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
-		$domain       = 'tws-codegarage';
-		$project_dir  = $this->dirname();
-		$project_file = WP_PLUGIN_DIR . "/{$project_dir}/{$domain}.php";
+		$domain = 'tws-codegarage';
 
-		if ( file_exists( $project_file ) ) {
-			$plugin = get_plugin_data( $project_file, false );
-
-			if ( ! empty( $plugin ) ) {
-				// Get all data when called upon.
-				if ( false === $key ) {
-					return $plugin;
-				}
-
-				return isset( $plugin[ $key ] ) ? (string) $plugin[ $key ] : '';
+		if ( file_exists( $file = WP_PLUGIN_DIR . "/{$this->dirname()}/{$domain}.php" ) ) {
+			if ( ! empty( $plugin = get_plugin_data( $file, false ) ) ) {
+				return false === $key ? $plugin : ( $plugin[ $key ] ?? '' );
 			}
 		}
 
-		$theme = wp_get_theme( $domain );
+		if ( ( $theme = wp_get_theme( $domain ) ) && $theme->exists() ) {
+			return false === $key ? $theme : ( $theme->get( $key ) ?: '' );
+		}
 
-		if ( $theme->exists() ) {
-			// Get all data when called upon.
-			if ( false === $key ) {
-				return $theme;
-			}
-
-			$val = $theme->get( $key );
-
-			return false !== $val ? $val : '';
+		/**
+		 * WPHOOK: Filter -> Enable to create project outside plugin/theme directory.
+		 *
+		 * @param bool $enable Whether to allow project creation.
+		 */
+		if ( true === apply_filters( 'tws_codegarage_enable_project_anywhere', false ) ) {
+			return '';
 		}
 
 		// Flag that project is not valid.
@@ -320,15 +311,10 @@ final class Bootstrap {
 	 * @since 1.0
 	 */
 	public function version( string $file ): string {
-		$debug = defined( 'WP_DEBUG' ) && WP_DEBUG;
-
-		if ( $debug ) {
-			return file_exists( $this->path( $file ) )
-				? (string) filemtime( $this->path( $file ) )
-				: (string) filemtime( __FILE__ );
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			return file_exists( $f = $this->path( $file ) ) ? filemtime( $f ) : filemtime( __FILE__ );
 		}
 
-		// Array means plugin, else theme.
 		return $this->is_plugin() ? $this->project['Version'] : $this->project->get( 'Version' );
 	}
 

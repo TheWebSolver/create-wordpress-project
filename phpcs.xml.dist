@@ -119,6 +119,12 @@
 			Eg: if( $x = file_exists( $y ) ) { require $x; }
 		-->
 		<exclude name="WordPress.CodeAnalysis.AssignmentInCondition.Found" />
+
+<!--
+			Allow variable assignment in the ternary operator.
+			Eg: true === ( $z = file_exists( $y ) ) ? $z : $x;
+		-->
+		<exclude name="WordPress.CodeAnalysis.AssignmentInCondition.FoundInTernaryCondition" />
 	</rule>
 
 	<rule ref="Squiz.PHP.DisallowMultipleAssignments">

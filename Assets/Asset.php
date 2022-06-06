@@ -126,8 +126,8 @@ class Asset {
 		}
 
 		// Map URI to editor styles from the plugin's directory.
-		if ( file_exists( Bootstrap::load()->path( 'CSS/editor/editor-styles.min.css' ) ) ) {
-			$css .= ',' . Bootstrap::load()->url( 'CSS/editor/editor-styles.min.css' );
+		if ( file_exists( Bootstrap::load()->path( $file = 'CSS/editor/editor-styles.min.css' ) ) ) {
+			$css .= ',' . Bootstrap::load()->url( $file );
 		}
 
 		return $css;
@@ -141,11 +141,7 @@ class Asset {
 	 * @since 1.0
 	 */
 	public function is_preload( $enabled ): bool {
-		if ( is_bool( $enabled ) ) {
-			return $enabled;
-		}
-
-		return is_callable( $enabled ) && call_user_func( $enabled );
+		return is_bool( $enabled ) ? $enabled : is_callable( $enabled ) && call_user_func( $enabled );
 	}
 
 	/**
@@ -184,10 +180,7 @@ class Asset {
 	 * @since 1.0
 	 */
 	public function enqueue_styles() {
-		// Enqueue Google Fonts.
-		$google_fonts = $this->google_fonts();
-
-		if ( ! empty( $google_fonts ) ) {
+		if ( ! empty( $google_fonts = $this->google_fonts() ) ) {
 			/**
 			 * Workaround for enqueuing google fonts with `version` parameters.
 			 *
@@ -196,11 +189,9 @@ class Asset {
 			wp_enqueue_style( 'tws-codegarage-fonts', $google_fonts, array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 		}
 
-		$path = Bootstrap::load()->path();
-
-		if ( ! $path ) {
+		if ( ! $path = Bootstrap::load()->path() ) {
 			/* translators: %s The stylesheet path */
-			_doing_it_wrong( __METHOD__, esc_html( sprintf( __( 'The stylesheet path "%s" could not be found.', 'tws-codegarage' ), $path ) ), '1.0' );
+			_doing_it_wrong( __METHOD__, esc_html( sprintf( __( 'The stylesheet path `%s` could not be found.', 'tws-codegarage' ), $path ) ), '1.0' );
 
 			return;
 		}
@@ -213,8 +204,6 @@ class Asset {
 			if ( ! $this->validate( $data ) ) {
 				continue;
 			}
-
-			$enabled = $data['preload'];
 
 			/**
 			 * Stylesheets are handled with two different logics.
@@ -245,7 +234,7 @@ class Asset {
 			 * <article id="blog-content">Content to be styled goes here...</article>
 			 * ```
 			 */
-			if ( $data['global'] || ! $this->has_preload() && $this->is_preload( $enabled ) ) {
+			if ( $data['global'] || ! $this->has_preload() && $this->is_preload( $data['preload'] ) ) {
 				wp_enqueue_style( $handle, $src, array(), $version, $data['media'] );
 			} else {
 				wp_register_style( $handle, $src, array(), $version, $data['media'] );
@@ -304,16 +293,13 @@ class Asset {
 	 * @since 1.0
 	 */
 	public function add_editor_styles() {
-		$url = $this->google_fonts();
-
-		if ( ! empty( $url ) ) {
-			// Enqueue Google Fonts.
+		if ( ! empty( $url = $this->google_fonts() ) ) {
 			add_editor_style( $url );
 		}
 
 		// Enqueue editor stylesheet.
-		if ( file_exists( Bootstrap::load()->path( 'Assets/CSS/editor/editor-styles.min.css' ) ) ) {
-			add_editor_style( 'Assets/CSS/editor/editor-styles.min.css' );
+		if ( file_exists( Bootstrap::load()->path( $file = 'Assets/CSS/editor/editor-styles.min.css' ) ) ) {
+			add_editor_style( $file );
 		}
 	}
 
@@ -537,7 +523,8 @@ class Asset {
 
 		// Bail if file not given.
 		if ( ! isset( $args['file'] ) ) {
-			_doing_it_wrong( __METHOD__, esc_html__( "The 'file' param with filename relative to Assets/JS directory must be passed to register the script.", 'tws-codegarage' ), '1.0' );
+			/* translators: %s: The script handle */
+			_doing_it_wrong( __METHOD__, esc_html( sprintf( __( 'The `file` param with filename relative to `Assets/JS` directory must be passed to register the script. Script handle: `%s`', 'tws-codegarage' ), $handle ) ), '1.0' );
 
 			return;
 		}
@@ -586,8 +573,8 @@ class Asset {
 		$version = $ver;
 
 		// Given files are not external links, generate URL and version number.
-		if ( file_exists( $_src = Bootstrap::load()->path( "Assets/JS/{$source}" ) ) ) {
-			$source = Bootstrap::load()->url( "Assets/JS/{$source}" );
+		if ( file_exists( $_src = Bootstrap::load()->path( $file = "Assets/JS/{$source}" ) ) ) {
+			$source = Bootstrap::load()->url( $file );
 
 			// Auto generate version number.
 			if ( false === $version ) {

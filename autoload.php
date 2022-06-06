@@ -219,7 +219,7 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 		private function parts( string $namespace ): array {
 			$parts = explode( '\\', substr( $this->class, strlen( $namespace ) ) );
 
-			return $parts ? $parts : array();
+			return $parts ?: array();
 		}
 
 		/**
@@ -297,18 +297,12 @@ if ( ! class_exists( '\\TheWebSolver\\Autoloader', false ) ) {
 				}
 
 				if ( is_string( $dir ) ) {
-					$file    = $this->file( $parts, $this->set( $dir ) );
-					$include = $this->include( $file );
-
-					if ( $include ) {
+					if ( $this->include( $file = $this->file( $parts, $this->set( $dir ) ) ) ) {
 						$files[] = $file;
 					}
 				} elseif ( is_array( $dir ) ) {
 					foreach ( $dir as $path ) {
-						$file    = $this->file( $parts, $this->set( $path ) );
-						$include = $this->include( $file );
-
-						if ( $include ) {
+						if ( $this->include( $file = $this->file( $parts, $this->set( $path ) ) ) ) {
 							$files[] = $file;
 						}
 					}
