@@ -42,6 +42,10 @@
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 
+	<!-- Ignore PHP files on asset directory. -->
+	<exclude-pattern>*/assets/css*.php</exclude-pattern>
+	<exclude-pattern>*/assets/js*.php</exclude-pattern>
+
 	<!--
 	#############################################################################
 	USE THE WordPress-Coding-Standards RULESET
